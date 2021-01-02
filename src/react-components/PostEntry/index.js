@@ -17,7 +17,7 @@ class CommentSection extends React.Component {
 		super(props);
 		this.state = {
 			display: 'none',
-			comments: props.comments
+			comments: props.comments,
 		}
 	}
 
@@ -105,7 +105,8 @@ export default class PostEntry extends React.Component {
 			num_likes: likes.length,
 			postUser: null,
 			commentRows: null,
-			comments: comments
+			comments: comments,
+			loading: true
 		};
 	}
 
@@ -121,10 +122,18 @@ export default class PostEntry extends React.Component {
 		} = this.props.post;
 
 		fetch(`/api/users/${userid}`)
-			.then((res) => res.json())
+			.then((res) => {
+				if (res.status !== 200){
+					return Promise.reject(); 
+				} 
+				return res.json()
+			})
 			.then((json) => {
 				this.setState({ postUser: json });
-		});	
+			})
+			.finally(() => {
+				this.setState({loading: false});
+			})
 	}
 
 	handleLike() {
@@ -216,9 +225,12 @@ export default class PostEntry extends React.Component {
 			);
 		}
 
-		if (this.state.postUser == null) {
-			return <LoadingDisplay />;
-		} else {
+		if(this.state.loading) { //show that this post is still loading
+			return <LoadingDisplay/>;
+		}
+		if (this.state.postUser === null) { //post failed to load, return null to not display this post
+			return null; 
+		} else { //post loaded, display it
 			return (
 				<div className="postEntryContainer">
 					{this.props.removable ? this.displayRemoveButton() : ""}
