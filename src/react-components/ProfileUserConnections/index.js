@@ -2,109 +2,120 @@ import React from "react";
 import "./styles.css";
 
 import SmallProfileBar from "../SmallProfileBar";
+import LoadingDisplay from "../LoadingDisplay";
 
 export default class ProfileUserConnections extends React.Component {
-	state = {
-		showingFollowers: true,
-	};
+	constructor(props){
+		super(props);
+		this.state = {
+			showingFollowers: true,
+			followers: [],
+			following: []
+		};
+	}
+	
+
+	follow(user) {
+		fetch(`/api/users/follow/${user._id}`, {
+			method: "post",
+		})
+		.then(res => {
+			if (res.status === 200) {
+				return res.json();
+			}
+			return Promise.reject();
+		})
+		.then(json => {
+			// this.props.app.setState({user: json.user})
+			const following = this.state.following;
+			following.push(json.follow);
+			this.setState({following: following})
+		})
+	}
+
+	unfollow(user) {
+		fetch(`/api/users/unfollow/${user._id}`, {
+			method: "post",
+		})
+		.then(res => {
+			if (res.status === 200) {
+				return res.json();
+			}
+			return Promise.reject();
+		})
+		.then(json => {
+			// this.props.app.setState({user: json.user})
+			const following = this.state.following;
+			console.log("before", following)
+			let index = following.findIndex(user => user._id == json.follow._id)
+			following.splice(index, 1);
+			console.log("splicing index", index)
+			console.log("after", following)
+			this.setState({following: following})
+			this.forceUpdate();
+		})
+	}
+	componentDidMount(){
+		const user = this.props.app.state.user;
+		fetch(`/api/users/${user._id}/followers`)
+			.then((res) => res.json())
+			.then((json) => {
+				this.setState({ followers: json}); //causes component to re-render with new state
+				console.log("followers", json)
+			});
+
+	
+		fetch(`/api/users/${user._id}/following`)
+			.then((res) => res.json())
+			.then((json) => {
+				this.setState({ following: json}); //causes component to re-render with new state
+				console.log("following", json)
+			});
+	}
 
 	renderNavBar() {
-		if (this.state.showingFollowers) {
 			return (
 				<div id="userConnectionsNav">
 					<ul>
-						<li
-							className="blackBottomBorder"
-							onClick={() => this.setState({ showingFollowers: true })}
-						>
+						<li className={this.state.showingFollowers ? "selectedNav" : "unselectedNav"} onClick={() => this.setState({ showingFollowers: true })}>
 							<span>
-								<b className="selectedNav">
 									Followers
-									{/* (
-									{this.props.numFollowers
-										? this.props.numFollowers
-										: this.props.followers.length}
-									) */}
-								</b>
 							</span>
 						</li>
-						<li onClick={() => this.setState({ showingFollowers: false })}>
-							Following
-							{/* (
-							{this.props.numFollowing
-								? this.props.numFollowing
-								: this.props.following.length}
-							) */}
+						<li className={this.state.showingFollowers ? "unselectedNav" : "selectedNav"} onClick={() => this.setState({ showingFollowers: false })}>
+							<span>
+									Following
+							</span>
 						</li>
 					</ul>
 				</div>
 			);
-		} else {
-			return (
-				<div id="userConnectionsNav">
-					<ul>
-						<li onClick={() => this.setState({ showingFollowers: true })}>
-							Followers
-							{/* (
-							{this.props.numFollowers
-								? this.props.numFollowers
-								: this.props.followers.length}
-							) */}
-						</li>
-						<li
-							className="blackBottomBorder"
-							onClick={() => this.setState({ showingFollowers: false })}
-						>
-							<b className="selectedNav">
-								Following
-								{/* (
-								{this.props.numFollowing
-									? this.props.numFollowing
-									: this.props.following.length}
-								) */}
-							</b>
-						</li>
-					</ul>
-				</div>
-			);
-		}
 	}
 
 	renderUserConnections() {
-		let listItems;
-		if (this.state.showingFollowers) {
-			listItems = this.props.followers.map((follower, index) => {
-				return (
-					<SmallProfileBar
-						uid={follower._id}
-						user={follower}
-						unfollow={this.props.unfollow}
-						key={index}
-						canUnfollow={false}
-						name={follower.firstname + " " + follower.lastname}
-						username={follower.username}
-						imgSrc={follower.profilePicture ? follower.profilePicture.image_url : 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png'}
-					/>
-				);
-			});
-		} else {
-			listItems = this.props.following.map((follow, index) => {
-				return (
-					<SmallProfileBar
-						uid={follow._id}
-						user={follow}
-						unfollow={this.props.unfollow}
-						key={index}
-						canUnfollow={this.props.canUnfollow}
-						name={follow.firstname + " " + follow.lastname}
-						username={follow.username}
-						imgSrc={follow.profilePicture ? follow.profilePicture.image_url : 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png'}
-					/>
-				);
-			});
+		if ((this.state.showingFollowers && this.state.followers == null) ||
+			(!this.state.showingFollowers && this.state.following == null)){
+				return <LoadingDisplay/>
 		}
 
-		return <div>{listItems}</div>;
+		var userList = this.state.showingFollowers ? this.state.followers : this.state.following;
+		console.log("userList", userList)
+		return (
+		<div>
+			{userList.map((user, index) => {
+				return (
+					<SmallProfileBar
+						uid={user._id}
+						user={user}
+						unfollow={this.unfollow.bind(this)} follow={this.follow.bind(this)}
+						key={index}
+						followed={this.state.following.indexOf(user) != -1}
+						app={this.props.app}
+					/>
+					)}
+			)}
+		</div>
+		)
 	}
 
 	render() {

@@ -38,6 +38,7 @@ export default class TopNavbar extends React.Component {
 							<SearchBar
 								maxusers={10}
 								loginUserid={this.props.app.state.user._id}
+								app={this.props.app}
 							/>
 							<Nav className="navContent">
 								<Nav.Link id="topNavBarOption" href="/userProfile">

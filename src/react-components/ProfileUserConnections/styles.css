@@ -17,6 +17,7 @@
 
 .selectedNav {
 	color: #f2a365;
+	border-bottom: solid 2px #f2a365;
 }
 
 #userConnectionsNav ul {
@@ -40,13 +41,8 @@
 
 #userConnectionsNav li:hover {
 	cursor: pointer;
-	/* background-color: rgb(110, 110, 120); */
 }
 
-/* .pushTextDown {
-  margin-top: 10px;
-} */
-
 .blackBottomBorder {
-	border-bottom: solid 2px #f2a365;
+	
 }

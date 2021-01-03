@@ -4,211 +4,48 @@ import { Link, refresh } from "react-router-dom";
 import LoadingDisplay from "../../react-components/LoadingDisplay";
 
 export default class SmallProfileBar extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			followed: null,
-		};
-	}
 
-	followUser(userid) {
-		fetch(`/api/users/follow/${userid}`, {
-			method: "post",
-		});
-	}
-
-	unfollowUser(userid) {
-		fetch(`/api/users/unfollow/${userid}`, {
-			method: "post",
-		});
-	}
-
-	componentDidMount(){
-		fetch(`/api/users/${this.props.uid}`)
-			.then((res) => res.json())
-			.then((json) => {
-				const followedstate = json.followers.includes(this.props.loginUserid);
-				this.setState({ followed: followedstate });
-			});
-	}
-
-	getBothBar() {
-		const { name, username, imgSrc } = this.props;
-
-		const linkTarget = {
-			pathname: this.props.uid ? "/otherUserProfile" : "/userProfile",
-			state: { uid: this.props.uid },
-			key: 0,
-		};
-
-		if (this.state.followed == null) {
-			return <LoadingDisplay />;
-		} else {
-			return (
-				<div id="smallProfileBar">
-					<Link
-						onClick={() => {
-							this.forceUpdate();
-						}}
-						to={linkTarget}
-					>
-						<div id="smallProfileBarLinkPartial">
-							<img id="smallProfileImg" src={imgSrc} alt="profile pic" />
-							<div id="smallProfileInfo">
-								<h5 id="smallProfileName">{name}</h5>
-								<h6 id="smallProfileUsername">@{username}</h6>
-							</div>
-						</div>
-					</Link>
-					<div id="buttonContainer">
-						{this.state.followed ? (
-							<div
-								onClick={() => this.unfollowUser(this.props.uid)}
-								id="unfollowButtonSmall"
-							>
-								Unfollow
-							</div>
-						) : (
-							<div
-								onClick={() => this.followUser(this.props.uid)}
-								id="unfollowButtonSmall"
-							>
-								follow
-							</div>
-						)}
-					</div>
-				</div>
-			);
-		}
-	}
-
-	getNormalBar() {
-		const { name, username, imgSrc } = this.props;
-
-		const linkTarget = {
-			pathname: this.props.uid ? "/otherUserProfile" : "/userProfile",
-			state: { uid: this.props.uid },
-			key: 0,
-		};
-
-		return (
-			<div id="smallProfileBar">
-				<Link
-					onClick={() => {
-						this.forceUpdate();
-					}}
-					to={linkTarget}
-				>
-					<div id="smallProfileBarLinkPartial">
-						<img id="smallProfileImg" src={imgSrc} alt="profile pic" />
-						<div id="smallProfileInfo">
-							<h5 id="smallProfileName">{name}</h5>
-							<h6 id="smallProfileUsername">@{username}</h6>
-						</div>
-					</div>
-				</Link>
+	followUnfollowButton() {
+		return this.props.followed ? (
+			<div  className="followUnfollowButton" onClick={() => this.props.unfollow(this.props.user)}>
+				Unfollow
 			</div>
-		);
-	}
-
-	getRemoveUserButton() {
-		return (
-			<div
-				className="removeUserButton"
-				onClick={() => this.props.removeUser(this.props.uid)}
-			></div>
-		);
-	}
-
-	getRemovableBar() {
-		const { name, username, imgSrc } = this.props;
-
-		const linkTarget = {
-			pathname: this.props.uid ? "/otherUserProfile" : "/userProfile",
-			state: { uid: this.props.uid },
-			key: 0,
-		};
-
-		return (
-			<div id="smallProfileBar">
-				<Link
-					onClick={() => {
-						this.forceUpdate();
-					}}
-					to={linkTarget}
-				>
-					<div id="smallProfileBarLinkPartial">
-						<img id="smallProfileImg" src={imgSrc} alt="profile pic" />
-						<div id="smallProfileInfo">
-							<h5 id="smallProfileName">{name}</h5>
-							<h6 id="smallProfileUsername">@{username}</h6>
-						</div>
-					</div>
-				</Link>
-				<div
-					onClick={() => this.props.removeUser(this.props.uid)}
-					id="unfollowButtonSmall"
-				>
-					Remove
-				</div>
-			</div>
-		);
-	}
-
-	getUnfollowableBar() {
-		const { name, username, imgSrc } = this.props;
-
-		const linkTarget = {
-			pathname: this.props.uid ? "/otherUserProfile" : "/userProfile",
-			state: { uid: this.props.uid },
-			key: 0,
-		};
-
-		return (
-			<div id="smallProfileBar">
-				<Link
-					onClick={() => {
-						this.forceUpdate();
-					}}
-					to={linkTarget}
-				>
-					<div id="smallProfileBarLinkPartial">
-						<img id="smallProfileImg" src={imgSrc} alt="profile pic" />
-						<div id="smallProfileInfo">
-							<h5 id="smallProfileName">{name}</h5>
-							<h6 id="smallProfileUsername">@{username}</h6>
-						</div>
-					</div>
-				</Link>
-				<div
-					onClick={() => this.unfollowUser(this.props.user)}
-					id="unfollowButtonSmall"
-				>
-					Unfollow
-				</div>
+		) :
+		(
+			<div  className="followUnfollowButton" onClick={() => this.props.follow(this.props.user)}> 
+				Follow
 			</div>
 		);
 	}
 
 	render() {
-		const { name, username, imgSrc } = this.props;
+		
+		const username=this.props.user.username
+		const imgSrc= this.props.user.profilePicture ? this.props.user.profilePicture.image_url : 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png'
+		
 
 		const linkTarget = {
 			pathname: this.props.uid ? "/otherUserProfile" : "/userProfile",
-			state: { uid: this.props.uid },
+			props: { uid: this.props.uid },
 			key: 0,
 		};
 
 		return (
-			<div>
-				{this.props.canUnfollow
-					? this.props.canFollow
-						? this.getBothBar()
-						: this.getUnfollowableBar()
-					: this.props.removeUser
-					? this.getRemovableBar()
-					: this.getNormalBar()}
+			<div className="smallProfileBar">
+				<Link to={linkTarget} >
+					<div className="smallProfileBarLinkPartial">
+						<img className="smallProfileImg" src={imgSrc} alt="profile pic" />
+						<div className="smallProfileInfo">
+							<h5 className="smallProfileName">{this.props.user.firstname + " " + this.props.user.lastname}</h5>
+							<h6 className="smallProfileUsername">@{username}</h6>
+						</div>
+					</div>
+				</Link>
+				{this.followUnfollowButton()}
 			</div>
 		);
 	}
 }
+
+
+	

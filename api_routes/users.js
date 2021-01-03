@@ -88,8 +88,11 @@ router.get("/api/users/search", mongoChecker, async (req, res) => {
 	const maxusers = parseInt(req.query.max) || 5;
 
 	try {
-		const users = await User.find({
-			username: new RegExp(`^${searchstring}.*`, "i"),
+		const users = await User.find({ 
+			$and: [
+				{username: new RegExp(`^${searchstring}.*`, "i")},
+				{_id: { $ne: req.session.user}},
+			]
 		}).limit(maxusers); // find by regular expression match
 		log(`search for username "${searchstring}" found ${users.length} matches`);
 		res.status(200).send(users);
@@ -460,42 +463,17 @@ router.post("/api/users/follow/:id", mongoChecker, async (req, res) => {
 			res.status(404).send();
 			return;
 		}
-		if (!user.following.includes(followid)) {
-			user.following.push(followid);
-			follow.followers.push(req.session.user);
-			const userResult = await user.save();
-			const followResult = await follow.save();
-		}
-
-		res.status(200).json({ user: user, follow: follow });
-	} catch (error) {
-		log(error);
-		if (isMongoError(error)) {
-			res.status(500).send("Internal Server Error");
-		} else {
-			res.status(400).send();
-		}
-	}
-
-	//can only follow other users when logged in
-	if (!req.session.user) {
-		res.status(401).send("Unauthorized");
-		return;
-	}
-
-	try {
-		const user = await User.findById(req.session.user);
-		const follow = await User.findById(followid);
-		if (!user || !follow) {
-			res.status(404).send();
+		if (user.following.includes(followid)) {
+			res.status(400).send("Already following this user")
 			return;
 		}
+
 		user.following.push(followid);
 		follow.followers.push(req.session.user);
 		const userResult = await user.save();
 		const followResult = await follow.save();
+		res.status(200).json({ user: userResult, follow: followResult });
 
-		res.status(200).json({ user: user, follow: follow });
 	} catch (error) {
 		log(error);
 		if (isMongoError(error)) {
@@ -504,6 +482,7 @@ router.post("/api/users/follow/:id", mongoChecker, async (req, res) => {
 			res.status(400).send();
 		}
 	}
+
 });
 
 /**

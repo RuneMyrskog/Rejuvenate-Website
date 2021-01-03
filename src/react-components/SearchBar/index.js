@@ -5,19 +5,56 @@ import { getUsersAsList } from "../../userData.js";
 import SmallProfileBar from "../../react-components/SmallProfileBar";
 
 export default class SearchBar extends React.Component {
-	state = {
-		matchedUsers: [],
-	};
+	constructor(props){
+		super(props)
+		this.state = {
+			matchedUsers: [],
+			following: props.app.state.user.following
+		}
+	}
+	follow(user) {
+		fetch(`/api/users/follow/${user._id}`, {
+			method: "post",
+		})
+		.then(res => {
+			if (res.status === 200) {
+				return res.json();
+			}
+			return Promise.reject();
+		})
+		.then(json => {
+			// this.props.app.setState({user: json.user})
+			const following = this.state.following;
+			following.push(json.follow);
+			this.setState({following: following})
+		})
+	}
+
+	unfollow(user) {
+		fetch(`/api/users/unfollow/${user._id}`, {
+			method: "post",
+		})
+		.then(res => {
+			if (res.status === 200) {
+				return res.json();
+			}
+			return Promise.reject();
+		})
+		.then(json => {
+			// this.props.app.setState({user: json.user})
+			const following = this.state.following;
+			following.splice(following.indexOf(json.follow._id), 1)
+			this.setState({following: following})
+		})
+	}
 
 	setMatchedUsers(query) {
 		fetch(`/api/users/search?s=${query}&max=${this.props.maxusers}`)
 			.then((res) => res.json())
 			.then((users) => {
 				console.log(`matched ${users.length} users for "${query}"`);
-				console.log(users)
 				this.setState({ matchedUsers: users });
 			});
-	
 	}
 
 	handleInput(e) {
@@ -68,24 +105,16 @@ export default class SearchBar extends React.Component {
 	}
 
 	getMatchedUsers() {
+		
 		return (
 			<div>
 				{this.state.matchedUsers.map((user) => {
 					return (
 						<SmallProfileBar
 							key={user._id}
-							uid={user._id}
-							isFollower={true}
-							canUnfollow={true}
-							canFollow={true}
-							loginUserid={this.props.loginUserid}
-							name={user.firstname + " " + user.lastname}
-							username={user.username}
-							imgSrc={
-								user.profilePicture
-									? user.profilePicture.image_url
-									: "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png"
-							}
+							user={user}
+							followed={this.state.following.indexOf(user._id) != -1}
+							follow={this.follow.bind(this)} unfollow={this.unfollow.bind(this)}
 						/>
 					);
 				})}

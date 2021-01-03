@@ -65,18 +65,6 @@ export default class Home extends React.Component {
 	componentDidMount() {
 		const userid = this.props.app.state.user._id;
 		this.setState({ userid: userid });
-
-		fetch(`/api/users/${userid}/followers`)
-			.then((res) => res.json())
-			.then((json) => {
-				this.setState({ followers: json}); //causes component to re-render with new state
-			});
-		
-		fetch(`/api/users/${userid}/following`)
-			.then((res) => res.json())
-			.then((json) => {
-				this.setState({ following: json}); //causes component to re-render with new state
-			});
 		
 
 		fetch(`/api/users/${userid}/feed`)
@@ -84,7 +72,6 @@ export default class Home extends React.Component {
 			.then((json) => {
 				this.setState({ posts: json }); //causes component to re-render with new state
 			});
-		console.log(this.state.posts)
 	}
 
 	// Generic handler for whenever we type in an input box.
@@ -125,6 +112,7 @@ export default class Home extends React.Component {
 						followers={this.state.followers}
 						following={this.state.following}
 						unfollow={this.unfollow.bind(this)}
+						app={this.props.app}
 					/>
 				</div>
 				<div className="postListContainer">
