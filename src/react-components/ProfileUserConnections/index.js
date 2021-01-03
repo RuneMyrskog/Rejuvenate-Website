@@ -73,30 +73,32 @@ export default class ProfileUserConnections extends React.Component {
 	renderUserConnections() {
 		let listItems;
 		if (this.state.showingFollowers) {
-			listItems = this.props.followers.map((f, index) => {
+			listItems = this.props.followers.map((follower, index) => {
 				return (
 					<SmallProfileBar
-						uid={f.uid}
+						uid={follower._id}
+						user={follower}
+						unfollow={this.props.unfollow}
 						key={index}
 						canUnfollow={false}
-						name={f.firstname + " " + f.lastname}
-						username={f.username}
-						imgSrc={f.profilePicture ? f.profilePicture.image_url : 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png'}
+						name={follower.firstname + " " + follower.lastname}
+						username={follower.username}
+						imgSrc={follower.profilePicture ? follower.profilePicture.image_url : 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png'}
 					/>
 				);
 			});
 		} else {
-			listItems = this.props.following.map((f, index) => {
+			listItems = this.props.following.map((follow, index) => {
 				return (
 					<SmallProfileBar
-						uid={f.uid}
-						user={f}
+						uid={follow._id}
+						user={follow}
 						unfollow={this.props.unfollow}
 						key={index}
 						canUnfollow={this.props.canUnfollow}
-						name={f.firstname + " " + f.lastname}
-						username={f.username}
-						imgSrc={f.profilePicture ? f.profilePicture.image_url : 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png'}
+						name={follow.firstname + " " + follow.lastname}
+						username={follow.username}
+						imgSrc={follow.profilePicture ? follow.profilePicture.image_url : 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png'}
 					/>
 				);
 			});

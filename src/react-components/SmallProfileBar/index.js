@@ -23,6 +23,15 @@ export default class SmallProfileBar extends React.Component {
 		});
 	}
 
+	componentDidMount(){
+		fetch(`/api/users/${this.props.uid}`)
+			.then((res) => res.json())
+			.then((json) => {
+				const followedstate = json.followers.includes(this.props.loginUserid);
+				this.setState({ followed: followedstate });
+			});
+	}
+
 	getBothBar() {
 		const { name, username, imgSrc } = this.props;
 
@@ -31,13 +40,6 @@ export default class SmallProfileBar extends React.Component {
 			state: { uid: this.props.uid },
 			key: 0,
 		};
-
-		fetch(`/api/users/${this.props.uid}`)
-			.then((res) => res.json())
-			.then((json) => {
-				const followedstate = json.followers.includes(this.props.loginUserid);
-				this.setState({ followed: followedstate });
-			});
 
 		if (this.state.followed == null) {
 			return <LoadingDisplay />;

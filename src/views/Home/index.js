@@ -84,6 +84,7 @@ export default class Home extends React.Component {
 			.then((json) => {
 				this.setState({ posts: json }); //causes component to re-render with new state
 			});
+		console.log(this.state.posts)
 	}
 
 	// Generic handler for whenever we type in an input box.

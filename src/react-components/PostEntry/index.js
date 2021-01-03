@@ -108,9 +108,12 @@ export default class PostEntry extends React.Component {
 			comments: comments,
 			loading: true
 		};
+
+		this.mounted = false;
 	}
 
 	componentDidMount() {
+		this.mounted = true;
 		const {
 			userid,
 			tag,
@@ -129,11 +132,14 @@ export default class PostEntry extends React.Component {
 				return res.json()
 			})
 			.then((json) => {
-				this.setState({ postUser: json });
+				if(this.mounted){
+					this.setState({ postUser: json });
+				}
 			})
-			.finally(() => {
-				this.setState({loading: false});
-			})
+	}
+
+	componentWillUnmount(){
+		this.mounted = false;
 	}
 
 	handleLike() {
@@ -225,11 +231,8 @@ export default class PostEntry extends React.Component {
 			);
 		}
 
-		if(this.state.loading) { //show that this post is still loading
-			return <LoadingDisplay/>;
-		}
 		if (this.state.postUser === null) { //post failed to load, return null to not display this post
-			return null; 
+			return <LoadingDisplay/>;
 		} else { //post loaded, display it
 			return (
 				<div className="postEntryContainer">

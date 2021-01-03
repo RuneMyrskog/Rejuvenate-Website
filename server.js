@@ -3,6 +3,10 @@ const express = require('express');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 
+//DEVELOPMENT
+process.env.USERNAME = "Rune";
+process.env.PASSWORD = "CSC309REJUVENATE";
+
 //mongoose connection
 const { mongoose } = require('./db/mongoose');
 mongoose.set('bufferCommands', false);  // don't buffer db requests if the db server isn't connected - minimizes http requests hanging if this is the case.
@@ -77,3 +81,4 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
     console.log(`server listening at http://localhost:${PORT}...`);
 })
+

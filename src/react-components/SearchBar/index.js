@@ -14,8 +14,10 @@ export default class SearchBar extends React.Component {
 			.then((res) => res.json())
 			.then((users) => {
 				console.log(`matched ${users.length} users for "${query}"`);
+				console.log(users)
 				this.setState({ matchedUsers: users });
 			});
+	
 	}
 
 	handleInput(e) {
