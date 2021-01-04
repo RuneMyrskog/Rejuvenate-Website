@@ -111,8 +111,9 @@ export default class Home extends React.Component {
 						canUnfollow={true}
 						followers={this.state.followers}
 						following={this.state.following}
-						unfollow={this.unfollow.bind(this)}
 						app={this.props.app}
+						follow={this.props.follow}
+						unfollow={this.props.unfollow}
 					/>
 				</div>
 				<div className="postListContainer">

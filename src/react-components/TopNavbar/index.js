@@ -39,6 +39,8 @@ export default class TopNavbar extends React.Component {
 								maxusers={10}
 								loginUserid={this.props.app.state.user._id}
 								app={this.props.app}
+								follow={this.props.follow}
+								unfollow={this.props.unfollow}
 							/>
 							<Nav className="navContent">
 								<Nav.Link id="topNavBarOption" href="/userProfile">

@@ -3,49 +3,14 @@ import "./styles.css";
 import { getUsersAsList } from "../../userData.js";
 
 import SmallProfileBar from "../../react-components/SmallProfileBar";
+import LoadingDisplay from "../LoadingDisplay";
 
 export default class SearchBar extends React.Component {
 	constructor(props){
 		super(props)
 		this.state = {
 			matchedUsers: [],
-			following: props.app.state.user.following
 		}
-	}
-	follow(user) {
-		fetch(`/api/users/follow/${user._id}`, {
-			method: "post",
-		})
-		.then(res => {
-			if (res.status === 200) {
-				return res.json();
-			}
-			return Promise.reject();
-		})
-		.then(json => {
-			// this.props.app.setState({user: json.user})
-			const following = this.state.following;
-			following.push(json.follow);
-			this.setState({following: following})
-		})
-	}
-
-	unfollow(user) {
-		fetch(`/api/users/unfollow/${user._id}`, {
-			method: "post",
-		})
-		.then(res => {
-			if (res.status === 200) {
-				return res.json();
-			}
-			return Promise.reject();
-		})
-		.then(json => {
-			// this.props.app.setState({user: json.user})
-			const following = this.state.following;
-			following.splice(following.indexOf(json.follow._id), 1)
-			this.setState({following: following})
-		})
 	}
 
 	setMatchedUsers(query) {
@@ -105,7 +70,10 @@ export default class SearchBar extends React.Component {
 	}
 
 	getMatchedUsers() {
-		
+		if (this.props.app.state.following == null){
+			return <LoadingDisplay/>
+		}
+		console.log("following", this.props.app.state.following)
 		return (
 			<div>
 				{this.state.matchedUsers.map((user) => {
@@ -113,8 +81,7 @@ export default class SearchBar extends React.Component {
 						<SmallProfileBar
 							key={user._id}
 							user={user}
-							followed={this.state.following.indexOf(user._id) != -1}
-							follow={this.follow.bind(this)} unfollow={this.unfollow.bind(this)}
+							app={this.props.app}
 						/>
 					);
 				})}

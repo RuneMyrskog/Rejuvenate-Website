@@ -4,15 +4,22 @@ import { Link, refresh } from "react-router-dom";
 import LoadingDisplay from "../../react-components/LoadingDisplay";
 
 export default class SmallProfileBar extends React.Component {
+	constructor(props){
+		super(props);
+		this.follow = props.app.follow.bind(props.app);
+		this.unfollow = props.app.unfollow.bind(props.app);
+	}
 
 	followUnfollowButton() {
-		return this.props.followed ? (
-			<div  className="followUnfollowButton" onClick={() => this.props.unfollow(this.props.user)}>
+		let followed = this.props.app.state.following.findIndex(user => user._id == this.props.user._id) != -1
+
+		return followed ? (
+			<div  className="followUnfollowButton" onClick={() => this.unfollow(this.props.user)}>
 				Unfollow
 			</div>
 		) :
 		(
-			<div  className="followUnfollowButton" onClick={() => this.props.follow(this.props.user)}> 
+			<div  className="followUnfollowButton" onClick={() => this.follow(this.props.user)}> 
 				Follow
 			</div>
 		);
@@ -25,8 +32,8 @@ export default class SmallProfileBar extends React.Component {
 		
 
 		const linkTarget = {
-			pathname: this.props.uid ? "/otherUserProfile" : "/userProfile",
-			props: { uid: this.props.uid },
+			pathname: this.props.user._id ? "/otherUserProfile" : "/userProfile",
+			props: { uid: this.props.user._id },
 			key: 0,
 		};
 

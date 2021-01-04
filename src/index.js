@@ -26,8 +26,47 @@ class App extends React.Component {
 		super(props);
 		//keep global state in App component's state object, pass down App obj to children
 		this.state = {
-			user: null
+			user: null,
+			following: null,
+			followers: null
 		}
+	}
+
+	follow(user) {
+		fetch(`/api/users/follow/${user._id}`, {
+			method: "post",
+		})
+		.then(res => {
+			if (res.status === 200) {
+				return res.json();
+			}
+			return Promise.reject();
+		})
+		.then(json => {
+
+			const following = this.state.following;
+			following.push(json.follow);
+			this.setState({following: following})
+		})
+	}
+
+	unfollow(user) {
+		fetch(`/api/users/unfollow/${user._id}`, {
+			method: "post",
+		})
+		.then(res => {
+			if (res.status === 200) {
+				return res.json();
+			}
+			return Promise.reject();
+		})
+		.then(json => {
+			
+			const following = this.state.following;
+			let index = following.findIndex(user => user._id == json.follow._id)
+			following.splice(index, 1);
+			this.setState({following: following})
+		})
 	}
 
 	render() {
@@ -40,10 +79,10 @@ class App extends React.Component {
 		console.log(`Logged in as user ${this.state.user._id}`);
 		return (
 			<>
-				<TopNavbar app={this}/>
+				<TopNavbar app={this} follow={this.follow.bind(this)} unfollow={this.unfollow.bind(this)}/>
 				<BrowserRouter>
 					<Switch>
-						<Route exact path="/home" render={() => (<Home app={this}/>)}/> 
+						<Route exact path="/home" render={() => (<Home app={this} follow={this.follow.bind(this)} unfollow={this.unfollow.bind(this)}/>)}/> 
 
 						<Route exact path="/admin home"  render={() => (<AdminHome app={this}/>)} />
 
@@ -71,7 +110,20 @@ class App extends React.Component {
 	componentDidMount(){
 		fetch(`/api/users/currentuser`)
 			.then(res => res.json())
-			.then(json => this.setState({user: json}));
+			.then(user => {
+				this.setState({user: user})
+
+				fetch(`/api/users/${user._id}/followers`)
+					.then(res => res.json())
+					.then(followers => this.setState({followers: followers}))
+
+				fetch(`/api/users/${user._id}/following`)
+					.then(res => res.json())
+					.then(following => this.setState({following: following}))
+			})
+			
+		
+		
 	}
 
 }
