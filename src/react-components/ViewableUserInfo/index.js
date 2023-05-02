@@ -1,8 +1,8 @@
 import React from 'react';
 import './styles.css';
-import { getFavouriteThings, getFavouriteThingsToImages } from '../../userData.js';
+import { getfavoriteThings, getfavoriteThingsToImages } from '../../userData.js';
 
-import FavouriteThing from '../FavouriteThing';
+import FavoriteThing from '../FavoriteThing';
 
 export default class ViewableUserInfo extends React.Component {
 
@@ -15,12 +15,12 @@ export default class ViewableUserInfo extends React.Component {
     )
   }
 
-  displayUneditableFavourites() {
+  displayUneditableFavorites() {
     return (
       <div>
         {
-          this.props.user.favouriteThings.map((f, index) => {
-              return(<FavouriteThing key={ index } setFavourites={ this.props.setFavourites } addable={ false } removable={ false } index={ index } name={ f } imgSrc={ getFavouriteThingsToImages()[f] }/>)
+          this.props.user.favoriteThings.map((f, index) => {
+              return(<favoriteThing key={ index } setfavorites={ this.props.setfavorites } addable={ false } removable={ false } index={ index } name={ f } imgSrc={ getfavoriteThingsToImages()[f] }/>)
           })
         }
       </div>
@@ -28,7 +28,7 @@ export default class ViewableUserInfo extends React.Component {
   }
 
   render(){
-    const { firstName, lastName, username, profilePic, numFollowers, numFollowing, bio, favouriteThings } = this.props.user;
+    const { firstName, lastName, username, profilePic, numFollowers, numFollowing, bio, favoriteThings } = this.props.user;
 
     return (
       <div id='userInfo'>
@@ -46,11 +46,11 @@ export default class ViewableUserInfo extends React.Component {
           */}
           { this.displayViewableBio() }
         </div>
-        <div className='userInfoComponent' id='favouriteThings'>
-          { /* Need to pull favourite things here, and use the user's name */ }
-          <h4>{ firstName + "'s Favourites" }</h4>
-          <div id='favouriteThingsContainer'>
-            { this.displayUneditableFavourites() }
+        <div className='userInfoComponent' id='favoriteThings'>
+          { /* Need to pull favorite things here, and use the user's name */ }
+          <h4>{ firstName + "'s favorites" }</h4>
+          <div id='favoriteThingsContainer'>
+            { this.displayUneditablefavorites() }
           </div>
         </div>
       </div>

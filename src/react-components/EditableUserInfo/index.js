@@ -1,18 +1,23 @@
 import React from "react";
 import "./styles.css";
 import {
-	getFavouriteThings,
-	getFavouriteThingsToImages,
+	getfavoriteThings,
+	getfavoriteThingsToImages,
 } from "../../userData.js";
+import LoadingDisplay from "../../react-components/LoadingDisplay";
 
-import FavouriteThing from "../FavouriteThing";
+import FavoriteThing from "../FavoriteThing";
 
 export default class UserInfo extends React.Component {
-	state = {
-		editable: false,
-		canRemoveFavourites: false,
-		canAddFavourites: false,
-	};
+	constructor(props) {
+		super(props)
+		this.state = {
+			editable: false,
+			canRemovefavorites: false,
+			canAddfavorites: false,
+		};
+	}
+	
 
 	displayViewableBio() {
 		return (
@@ -33,42 +38,43 @@ export default class UserInfo extends React.Component {
 		);
 	}
 
-	removeFavourite(favourite) {
-		const favourites = this.props.user.favouriteThings;
-		favourites.splice(favourites.indexOf(favourite), 1);
-		this.props.setFavourites(favourites);
+	removefavorite(favorite) {
+		const favorites = this.props.user.favoriteThings;
+		favorites.splice(favorites.indexOf(favorite), 1);
+		this.props.setfavorites(favorites);
 	}
 
-	addFavourite(favourite) {
-		const favourites = this.props.user.favouriteThings;
-		favourites.push(favourite);
-		this.props.setFavourites(favourites);
-		this.enableRemovingFavourites();
+	addfavorite(favorite) {
+		const favorites = this.props.user.favoriteThings;
+		favorites.push(favorite);
+		this.props.setfavorites(favorites);
+		this.enableRemovingfavorites();
 	}
 
 	saveEdits() {
-		this.props.setBio(document.querySelector("#editableBio").value);
-
+		//this.props.setBio(document.querySelector("#editableBio").value);
+		let newBio = document.querySelector("#editableBio").value
+		this.props.user.bio = newBio
 		this.setState((state, props) => ({
 			editable: false,
-			canAddFavourites: false,
-			canRemoveFavourites: false,
+			canAddfavorites: false,
+			canRemovefavorites: false,
 		}));
 	}
 
-	enableRemovingFavourites(favourties) {
+	enableRemovingfavorites(favourties) {
 		this.setState((state, props) => ({
 			editable: true,
-			canAddFavourites: false,
-			canRemoveFavourites: true,
+			canAddfavorites: false,
+			canRemovefavorites: true,
 		}));
 	}
 
-	enableAddingFavourites(favourties) {
+	enableAddingfavorites(favourties) {
 		this.setState((state, props) => ({
 			editable: true,
-			canAddFavourites: true,
-			canRemoveFavourites: false,
+			canAddfavorites: true,
+			canRemovefavorites: false,
 		}));
 	}
 
@@ -76,29 +82,29 @@ export default class UserInfo extends React.Component {
 		if (this.state.editable) {
 			this.saveEdits();
 		} else {
-			this.enableRemovingFavourites();
+			this.enableRemovingfavorites();
 		}
 	}
 
-	displayRemovableFavourites() {
+	displayRemovablefavorites() {
 		return (
 			<div>
 				<div
-					onClick={this.enableAddingFavourites.bind(this)}
-					id="addFavouriteThingsButton"
+					onClick={this.enableAddingfavorites.bind(this)}
+					id="addfavoriteThingsButton"
 				>
 					<span id="plusSymbol">+</span>
 				</div>
-				{this.props.user.favouriteThings.map((f, index) => {
+				{this.props.user.favoriteThings.map((f, index) => {
 					return (
-						<FavouriteThing
+						<FavoriteThing
 							key={index}
-							onEditableButtonClick={this.removeFavourite.bind(this)}
+							onEditableButtonClick={this.removefavorite.bind(this)}
 							addable={false}
 							removable={true}
 							index={index}
 							name={f}
-							imgSrc={getFavouriteThingsToImages()[f]}
+							imgSrc={getfavoriteThingsToImages()[f]}
 						/>
 					);
 				})}
@@ -106,23 +112,23 @@ export default class UserInfo extends React.Component {
 		);
 	}
 
-	displayAddableFavourites() {
-		const unusedFavs = getFavouriteThings().filter(
-			(f) => !this.props.user.favouriteThings.includes(f)
+	displayAddablefavorites() {
+		const unusedFavs = getfavoriteThings().filter(
+			(f) => !this.props.user.favoriteThings.includes(f)
 		);
 		return (
 			<div>
 				{unusedFavs.map((f, index) => {
 					return (
-						<FavouriteThing
+						<FavoriteThing
 							key={index}
-							onEditableButtonClick={this.addFavourite.bind(this)}
-							setFavourites={this.props.setFavourites}
+							onEditableButtonClick={this.addfavorite.bind(this)}
+							setfavorites={this.props.setfavorites}
 							addable={true}
 							removable={false}
 							index={index}
 							name={f}
-							imgSrc={getFavouriteThingsToImages()[f]}
+							imgSrc={getfavoriteThingsToImages()[f]}
 						/>
 					);
 				})}
@@ -130,19 +136,19 @@ export default class UserInfo extends React.Component {
 		);
 	}
 
-	displayUneditableFavourites() {
+	displayUneditablefavorites() {
 		return (
 			<div>
-				{this.props.user.favouriteThings.map((f, index) => {
+				{this.props.user.favoriteThings.map((f, index) => {
 					return (
-						<FavouriteThing
+						<FavoriteThing
 							key={index}
-							setFavourites={this.props.setFavourites}
+							setfavorites={this.props.setfavorites}
 							addable={false}
 							removable={false}
 							index={index}
 							name={f}
-							imgSrc={getFavouriteThingsToImages()[f]}
+							imgSrc={getfavoriteThingsToImages()[f]}
 						/>
 					);
 				})}
@@ -151,23 +157,30 @@ export default class UserInfo extends React.Component {
 	}
 
 	render() {
+		console.log("USER: " + JSON.stringify(this.props.user))
+		
+		if (this.props.user === null) { //post failed to load, return null to not display this post
+			return <LoadingDisplay />;
+		} 
+
 		const {
-			firstName,
-			lastName,
+			firstname,
+			lastname,
 			username,
-			profilePic,
-			numFollowers,
-			numFollowing,
+			profilePicture,
 			bio,
-			favouriteThings,
 		} = this.props.user;
 
 		return (
 			<div id="userInfo">
 				{/* Need to pull image, name, username, list of followers, list of users following, bio */}
 				<div className="userInfoComponent" id="userInfoMain">
-					<img src={profilePic} alt="profile pic" />
-					<h1>{firstName + " " + lastName}</h1>
+					<img id="leftProfilePicture" src={
+						profilePicture ? 
+							profilePicture.image_url
+							: "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png"
+					} alt="profile pic" />
+					<h1>{firstname + " " + lastname}</h1>
 					<h3>@{username}</h3>
 					{/*<ul>
             <li><b>Followers</b><br /><span className='follow-amount'>{ numFollowers }</span></li>
@@ -180,18 +193,16 @@ export default class UserInfo extends React.Component {
 						? this.displayEditableBio()
 						: this.displayViewableBio()}
 				</div>
-				<div className="userInfoComponent" id="favouriteThings">
-					{/* Need to pull favourite things here, and use the user's name */}
-					<h4>{firstName + "'s Favourites"}</h4>
-					{/* These images are just placeholders for now and should NOT be submitted!! */}
-					<div id="favouriteThingsContainer">
-						{!this.state.editable ? this.displayUneditableFavourites() : ""}
-						{this.state.canAddFavourites ? this.displayAddableFavourites() : ""}
-						{this.state.canRemoveFavourites
-							? this.displayRemovableFavourites()
+				{/* <div className="userInfoComponent" id="favoriteThings">
+					<h4>{firstname + "'s favorites"}</h4>
+					<div id="favoriteThingsContainer">
+						{!this.state.editable ? this.displayUneditablefavorites() : ""}
+						{this.state.canAddfavorites ? this.displayAddablefavorites() : ""}
+						{this.state.canRemovefavorites
+							? this.displayRemovablefavorites()
 							: ""}
 					</div>
-				</div>
+				</div> */}
 			</div>
 		);
 	}

@@ -90,12 +90,12 @@ export default class Home extends React.Component {
 		});
 	};
 
-	unfollow(followee) {
-		this.state.following.splice(this.state.following.indexOf(followee), 1);
-		this.setState((state, props) => ({
-			numFollowing: state.numFollowing - 1,
-		}));
-	}
+	// unfollow(followee) {
+	// 	this.state.following.splice(this.state.following.indexOf(followee), 1);
+	// 	this.setState((state, props) => ({
+	// 		numFollowing: state.numFollowing - 1,
+	// 	}));
+	// }
 
 	appendPostToFeed(post){
 		const posts = this.state.posts;
@@ -108,12 +108,7 @@ export default class Home extends React.Component {
 			<div id="homeContainer">
 				<div className="friendListContainer">
 					<ProfileUserConnections
-						canUnfollow={true}
-						followers={this.state.followers}
-						following={this.state.following}
 						app={this.props.app}
-						follow={this.props.follow}
-						unfollow={this.props.unfollow}
 					/>
 				</div>
 				<div className="postListContainer">

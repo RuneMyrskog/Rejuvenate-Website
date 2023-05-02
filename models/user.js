@@ -17,6 +17,7 @@ const UserSchema = mongoose.Schema({
     lastname: {type: String, required: true, minlength: 1},
     profilePicture: ImageSchema,
     bio: {type: String},
+    favoriteThings: [String],
     followers: [mongoose.Schema.Types.ObjectId],
     following: [mongoose.Schema.Types.ObjectId],
     isAdmin: {type: Boolean, required: true}

@@ -12,9 +12,6 @@ export default class ProfileUserConnections extends React.Component {
 		};
 	}
 	
-
-	
-
 	renderNavBar() {
 			return (
 				<div id="userConnectionsNav">
@@ -43,14 +40,11 @@ export default class ProfileUserConnections extends React.Component {
 		
 		return (
 		<div>
-			{userList.map((user, index) => {
+			{userList.map((user) => {
 				return (
 					<SmallProfileBar
-						uid={user._id}
 						user={user}
-						unfollow={this.props.unfollow} follow={this.props.follow}
-						key={index}
-						followed={this.props.app.state.following.indexOf(user) != -1}
+						key={user._id}
 						app={this.props.app}
 					/>
 					)}

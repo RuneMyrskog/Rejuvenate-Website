@@ -1,5 +1,5 @@
-export function getFavouriteThingsToImages() {
-	const favouriteThings = {
+export function getfavoriteThingsToImages() {
+	const favoriteThings = {
 		Bananas: "https://pixy.org/src/442/thumbs350/4428098.jpg",
 		Hockey: "https://pixy.org/src/428/4282288.jpeg",
 		Salads: "https://pixy.org/src/419/4197778.jpeg",
@@ -13,10 +13,10 @@ export function getFavouriteThingsToImages() {
 		Weights: "https://pixy.org/src/223/thumbs350/2239559.jpg"
 	};
 
-	return favouriteThings;
+	return favoriteThings;
 }
 
-export function getFavouriteThings() {
+export function getfavoriteThings() {
   return ["Bananas", "Hockey", "Salads", "Jogging", "Skiing", "Tennis", "Push-ups",
           "Biking", "Basketball", "Smoothies", "Weights"];
 }
@@ -53,8 +53,8 @@ let users = {
 		profilePic:
 			"https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png",
 		bio:
-			"Hi, my name is John and I like to run. Bananas are my favourite fruit because they're easy to pack.",
-		favouriteThings: ["Bananas", "Jogging", "Hockey", "Salads"],
+			"Hi, my name is John and I like to run. Bananas are my favorite fruit because they're easy to pack.",
+		favoriteThings: ["Bananas", "Jogging", "Hockey", "Salads"],
 		posts: [
 			{
 				tag: "Fitness",
@@ -162,7 +162,7 @@ let users = {
 			"https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png",
 		bio:
 			"‘You must expect great things of yourself before you can do them.’ - MJ",
-		favouriteThings: ["Basketball", "Push-ups"],
+		favoriteThings: ["Basketball", "Push-ups"],
 		posts: [
 			{
 				tag: "Fitness",
@@ -189,7 +189,7 @@ let users = {
 		profilePic:
 			"https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png",
 		bio: "bikes r life",
-		favouriteThings: ["Biking"],
+		favoriteThings: ["Biking"],
 		posts: [],
 		following: [3, 4],
 		followers: [1, 3, 4],
@@ -204,7 +204,7 @@ let users = {
 		profilePic:
 			"https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png",
 		bio: "This app really motivates me to stay fit! I use it everyday! :)",
-		favouriteThings: ["Hockey", "Skiing", "Smoothies"],
+		favoriteThings: ["Hockey", "Skiing", "Smoothies"],
 		posts: [
 			{
 				tag: "Lifestyle",
@@ -250,7 +250,7 @@ let users = {
 		profilePic:
 			"https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png",
 		bio: "Yoooo it's Mike you already know where its at I keep that fitness game strong.",
-		favouriteThings: ["Weights", "Smoothies", "Bananas", "Biking", "Salads"],
+		favoriteThings: ["Weights", "Smoothies", "Bananas", "Biking", "Salads"],
 		posts: [
 			{
 				tag: "Lifestyle",
@@ -279,7 +279,7 @@ let users = {
 		profilePic:
 			"https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png",
 		bio: "",
-		favouriteThings: [],
+		favoriteThings: [],
 		posts: [],
 		following: [],
 		followers: [],

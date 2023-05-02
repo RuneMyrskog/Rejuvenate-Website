@@ -4,6 +4,14 @@
 	font-family: "Work Sans", sans-serif;
 }
 
+#loginAsUserGreeting {
+	font-family: "Work Sans", sans-serif;
+	color: #ececec;
+	width: 16vw;
+	display: inline-block
+}
+
+
 body {
 	background-color: #202936;
 }

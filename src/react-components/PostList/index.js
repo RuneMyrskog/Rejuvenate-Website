@@ -5,7 +5,11 @@ import { v4 as uuid } from "uuid";
 import "./styles.css";
 
 export default class PostList extends React.Component {
+	constructor(props) {
+		super(props)
+	}
 	render() {
+		console.log("PROPS: " + JSON.stringify(this.props.posts))
 		return (
 			<ListGroup className="postList">
 				{this.props.posts.map((post) => (

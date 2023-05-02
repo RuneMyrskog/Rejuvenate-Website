@@ -8,17 +8,15 @@
 
 .userInfoComponent {
 	margin-bottom: 10px;
-	padding: 10px;
+	padding: 20px;
 	background-color: #202936;
+	text-align: center;
 }
 
 #userInfoMain img {
 	border-radius: 4px;
-	height: 200px;
-	width: 200px;
-	margin-top: 25px;
-	margin-left: 58px;
-	border: 0px;
+	height: 10vmax;
+	width: 10vmax;
 }
 
 #userInfoMain h1 {
@@ -93,6 +91,7 @@
 
 #viewableBio {
 	/* margin-bottom: 6px; */
+	text-align: left;
 }
 
 #editableBio {

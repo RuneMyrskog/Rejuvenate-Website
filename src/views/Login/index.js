@@ -113,6 +113,8 @@ export default class Login extends React.Component {
 						</Button> */}
 					</FormControl>
 				</div>
+
+				<p id="loginAsUserGreeting">This is a project website developed with the MERN stack, you can try it out by logging in with "user" as the username and password, or signing up!</p>
 			</div>
 		);
 	}
