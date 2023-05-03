@@ -9,7 +9,6 @@ export default class TopNavbar extends React.Component {
 		fetch(`/api/logout`, {
 			method: "post",
 		});
-		this.props.history.push("/login");
 	};
 
 	dashboardLinkIfAdmin() {
@@ -26,6 +25,7 @@ export default class TopNavbar extends React.Component {
 	}
 
 	render() {
+		const client_userid = this.props.app.state.user._id
 		return (
 			<div className="topRow">
 				<BrowserRouter>
@@ -43,23 +43,15 @@ export default class TopNavbar extends React.Component {
 								unfollow={this.props.unfollow}
 							/>
 							<Nav className="navContent">
-								<Nav.Link id="topNavBarOption" href="/userProfile">
+								<Nav.Link id="topNavBarOption" href="/home">
+									Home
+								</Nav.Link>
+								<Nav.Link id="topNavBarOption" href={"/profile/" + client_userid}>
 									Profile
 								</Nav.Link>
 								<Nav.Link id="topNavBarOption" href="/statistics">
 									Statistics
 								</Nav.Link>
-								{/* <NavDropdown title="Statistics" id="option">
-									<NavDropdown.Item href="/statistics/record">
-										Record Statistics
-									</NavDropdown.Item>
-									<NavDropdown.Item href="/statistics">
-										View Statistics
-									</NavDropdown.Item>
-								</NavDropdown> */}
-								{/* <Nav.Link id="topNavBarOption" href="/settings">
-									Settings
-								</Nav.Link> */}
 								<Nav.Link
 									id="topNavBarOption"
 									onClick={this.logout}

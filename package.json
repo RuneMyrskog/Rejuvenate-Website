@@ -28,7 +28,7 @@
   },
   "scripts": {
     "server": "npm run build && nodemon server",
-    "dev": "react-scripts start --ignore client",
+    "dev": "react-scripts start",
     "start": "node server.js",
     "build": "react-scripts build",
     "test": "react-scripts test",

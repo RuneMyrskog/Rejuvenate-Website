@@ -8,8 +8,10 @@ export default class PostList extends React.Component {
 	constructor(props) {
 		super(props)
 	}
+	componentDidMount(){
+		console.log("updated")
+	}
 	render() {
-		console.log("PROPS: " + JSON.stringify(this.props.posts))
 		return (
 			<ListGroup className="postList">
 				{this.props.posts.map((post) => (

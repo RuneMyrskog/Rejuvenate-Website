@@ -12,7 +12,6 @@ export default class UserInfo extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			editable: false,
 			canRemovefavorites: false,
 			canAddfavorites: false,
 		};
@@ -157,7 +156,6 @@ export default class UserInfo extends React.Component {
 	}
 
 	render() {
-		console.log("USER: " + JSON.stringify(this.props.user))
 		
 		if (this.props.user === null) { //post failed to load, return null to not display this post
 			return <LoadingDisplay />;

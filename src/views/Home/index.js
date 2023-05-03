@@ -109,6 +109,7 @@ export default class Home extends React.Component {
 				<div className="friendListContainer">
 					<ProfileUserConnections
 						app={this.props.app}
+						editable={true}
 					/>
 				</div>
 				<div className="postListContainer">

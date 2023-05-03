@@ -46,6 +46,7 @@ export default class ProfileUserConnections extends React.Component {
 						user={user}
 						key={user._id}
 						app={this.props.app}
+						editable={this.props.editable}
 					/>
 					)}
 			)}

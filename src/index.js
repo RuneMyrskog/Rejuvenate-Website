@@ -88,9 +88,9 @@ class App extends React.Component {
 
 						<Route exact path="/admin dashboard" render={() => (<AdminDashboard app={this}/>)} />
 
-						<Route exact path="/userProfile" render={() => (<EditableProfile app={this}/>)} />
+						<Route path="/profile/:id" render={() => (<EditableProfile app={this}/>)} />
 
-						<Route exact path="/otherUserProfile" render={() => (<ViewableProfile app={this}/>)} />
+						<Route exact path="/otherUserProfile" render={() => (<EditableProfile app={this}/>)} /> 
 
 						{/* <Route exact path="/password reset" render={() => (<PasswordReset app={this}/>)} /> */}
 

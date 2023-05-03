@@ -1,10 +1,13 @@
 import React from 'react';
 import './styles.css';
-import { getfavoriteThings, getfavoriteThingsToImages } from '../../userData.js';
-
+import LoadingDisplay from "../../react-components/LoadingDisplay";
 import FavoriteThing from '../FavoriteThing';
 
 export default class ViewableUserInfo extends React.Component {
+
+  constructor(props) {
+    super(props)
+  }
 
   displayViewableBio() {
     return (
@@ -15,27 +18,23 @@ export default class ViewableUserInfo extends React.Component {
     )
   }
 
-  displayUneditableFavorites() {
-    return (
-      <div>
-        {
-          this.props.user.favoriteThings.map((f, index) => {
-              return(<favoriteThing key={ index } setfavorites={ this.props.setfavorites } addable={ false } removable={ false } index={ index } name={ f } imgSrc={ getfavoriteThingsToImages()[f] }/>)
-          })
-        }
-      </div>
-    )
-  }
-
   render(){
-    const { firstName, lastName, username, profilePic, numFollowers, numFollowing, bio, favoriteThings } = this.props.user;
+    if (this.props.user === null) { //post failed to load, return null to not display this post
+      return <LoadingDisplay />;
+    } 
+    //console.log("USERESLDF: " + this.props.user)
+    const { firstname, lastname, username, profilePicture, bio, favoriteThings } = this.props.user;
 
     return (
       <div id='userInfo'>
         { /* Need to pull image, name, username, list of followers, list of users following, bio */ }
         <div className='userInfoComponent' id='userInfoMain'>
-          <img src={ profilePic } alt='profile pic'/>
-          <h1>{ firstName + " " + lastName }</h1>
+          <img id="leftProfilePicture" src={
+            profilePicture ?
+              profilePicture.image_url
+              : "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png"
+          } alt="profile pic" />
+          <h1>{ firstname + " " + lastname }</h1>
           <h3>@{ username }</h3>
           <div onClick={ this.props.toggleFollow } id='bigProfileButton'>{ this.props.canFollow ? 'Follow' : 'Unfollow' }</div>
           {/*
@@ -45,13 +44,6 @@ export default class ViewableUserInfo extends React.Component {
           </ul>
           */}
           { this.displayViewableBio() }
-        </div>
-        <div className='userInfoComponent' id='favoriteThings'>
-          { /* Need to pull favorite things here, and use the user's name */ }
-          <h4>{ firstName + "'s favorites" }</h4>
-          <div id='favoriteThingsContainer'>
-            { this.displayUneditablefavorites() }
-          </div>
         </div>
       </div>
     );

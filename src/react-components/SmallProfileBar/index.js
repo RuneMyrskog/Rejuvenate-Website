@@ -2,12 +2,21 @@ import React from "react";
 import "./styles.css";
 import { Link, refresh } from "react-router-dom";
 import LoadingDisplay from "../../react-components/LoadingDisplay";
+import { Nav, } from "react-bootstrap";
 
 export default class SmallProfileBar extends React.Component {
 	constructor(props){
 		super(props);
 		this.follow = props.app.follow.bind(props.app);
 		this.unfollow = props.app.unfollow.bind(props.app);
+
+		this.state = {
+			userid: props.user._id
+		}
+	}
+
+	emptyDiv() {
+		return (<div></div>)
 	}
 
 	followUnfollowButton() {
@@ -32,14 +41,16 @@ export default class SmallProfileBar extends React.Component {
 		
 
 		const linkTarget = {
-			pathname: this.props.user._id ? "/otherUserProfile" : "/userProfile",
-			props: { uid: this.props.user._id },
+			pathname: "/profile/" + this.props.user._id,
+			props: { userid: this.props.user._id},
 			key: 0,
 		};
 
+
+
 		return (
 			<div className="smallProfileBar">
-				<Link to={linkTarget} >
+				<Nav.Link className="profileLink" href={"/profile/" + this.props.user._id}>
 					<div className="smallProfileBarLinkPartial">
 						<img className="smallProfileImg" src={imgSrc} alt="profile pic" />
 						<div className="smallProfileInfo">
@@ -47,8 +58,8 @@ export default class SmallProfileBar extends React.Component {
 							<h6 className="smallProfileUsername">@{username}</h6>
 						</div>
 					</div>
-				</Link>
-				{this.followUnfollowButton()}
+				</Nav.Link>
+				{this.props.editable ? this.followUnfollowButton() : this.emptyDiv()}
 			</div>
 		);
 	}

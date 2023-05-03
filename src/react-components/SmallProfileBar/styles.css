@@ -7,7 +7,9 @@
 	border-radius: 10px;
 	float: left;
 }
-
+.nav-link {
+	padding: 0px;
+}
 .smallProfileImg {
 	margin: 5px;
 	height: 40px;
@@ -88,7 +90,7 @@
 .smallProfileBarLinkPartial {
 	width: 80%;
 	box-sizing: border-box;
-	border-right: 3px solid #202936;
+	
 	height: 100%;
 	border-top-left-radius: 10px;
 	border-bottom-left-radius: 10px;

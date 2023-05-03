@@ -123,6 +123,7 @@ export default class PostEntry extends React.Component {
 			comments,
 			likes,
 		} = this.props.post;
+		//console.log("updated")
 
 		fetch(`/api/users/${userid}`)
 			.then((res) => {
