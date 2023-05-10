@@ -29,5 +29,6 @@ button {
 .container-spaced {
 	display: flex;
 	justify-content: center;
+	gap: 8vw;
 	align-items: center;
 }

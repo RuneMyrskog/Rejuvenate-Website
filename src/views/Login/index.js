@@ -6,7 +6,7 @@ import { Button } from "react-bootstrap";
 import TextField from "@material-ui/core/TextField";
 import FormControl from "@material-ui/core/FormControl";
 
-import liftingMan from "../../images/man_lifting.png";
+import { DumbellIcon } from "../../react-components/Icons";
 
 // TODO: Convert this to a functional component.
 export default class Login extends React.Component {
@@ -70,7 +70,7 @@ export default class Login extends React.Component {
 			<div id="loginContainer">
 				<h1 id="title">Rejuvenate</h1>
 				<div className="container-spaced">
-					{/* <img className="icon-image" src={liftingMan} alt="liftingMan"></img> */}
+					<DumbellIcon id="left-dumbell-icon"/>
 
 					<div className="loginComponent">
 						<FormControl>
@@ -117,7 +117,9 @@ export default class Login extends React.Component {
 								Reset Password
 							</Button> */}
 						</FormControl>
+						
 					</div>
+					<DumbellIcon id="right-dumbell-icon" />
 				</div>
 
 				<p id="loginAsUserGreeting">This is a project website developed with the MERN stack, you can try it out by logging in with "user" as the username and password, or signing up!</p>

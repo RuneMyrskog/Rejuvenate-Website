@@ -5,6 +5,7 @@ import loginConstant from "./../../constants/login/login_constants.js";
 import { Button } from "react-bootstrap";
 import TextField from "@material-ui/core/TextField";
 import FormControl from "@material-ui/core/FormControl";
+import { DumbellIcon } from "../../react-components/Icons";
 
 // TODO: Convert this to a functional component.
 export default class Register extends React.Component {
@@ -99,6 +100,8 @@ export default class Register extends React.Component {
 			<div id="loginContainer">
 				<h1 id="title">Rejuvenate</h1>
 				<div className="container-spaced">
+					<DumbellIcon id="left-dumbell-icon" />
+
 					<div className="loginComponent">
 						<FormControl>
 							<TextField
@@ -153,6 +156,7 @@ export default class Register extends React.Component {
 							</Button>
 						</FormControl>
 					</div>
+					<DumbellIcon id="right-dumbell-icon" />
 				</div>
 				{this.displayMessage()}
 			</div>
