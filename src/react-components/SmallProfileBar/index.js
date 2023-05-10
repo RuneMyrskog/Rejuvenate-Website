@@ -23,13 +23,13 @@ export default class SmallProfileBar extends React.Component {
 		let followed = this.props.app.state.following.findIndex(user => user._id == this.props.user._id) != -1
 
 		return followed ? (
-			<div  className="followUnfollowButton" onClick={() => this.unfollow(this.props.user)}>
-				Unfollow
+			<div  className="followUnfollowContainer" >
+				<span className="followUnfollowSpan" onClick={() => this.unfollow(this.props.user)}>unfollow</span>
 			</div>
 		) :
 		(
-			<div  className="followUnfollowButton" onClick={() => this.follow(this.props.user)}> 
-				Follow
+			<div  className="followUnfollowContainer" > 
+					<span className="followUnfollowSpan" onClick={() => this.follow(this.props.user)}>follow</span>
 			</div>
 		);
 	}
@@ -50,15 +50,18 @@ export default class SmallProfileBar extends React.Component {
 
 		return (
 			<div className="smallProfileBar">
-				<Nav.Link className="profileLink" href={"/profile/" + this.props.user._id}>
-					<div className="smallProfileBarLinkPartial">
-						<img className="smallProfileImg" src={imgSrc} alt="profile pic" />
+				<div className="smallProfileBarLinkPartial">
+					<img className="smallProfileImg" src={imgSrc} alt="profile pic" />
+					
 						<div className="smallProfileInfo">
+						<Nav.Link className="profileLink" href={"/profile/" + this.props.user._id}>
 							<h5 className="smallProfileName">{this.props.user.firstname + " " + this.props.user.lastname}</h5>
 							<h6 className="smallProfileUsername">@{username}</h6>
+						</Nav.Link>
 						</div>
-					</div>
-				</Nav.Link>
+					
+					
+				</div>
 				{this.props.editable ? this.followUnfollowButton() : this.emptyDiv()}
 			</div>
 		);

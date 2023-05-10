@@ -96,61 +96,63 @@ export default class Register extends React.Component {
 	render() {
 		console.log(this.state)
 		return (
-			<div id="registerContainer">
+			<div id="loginContainer">
 				<h1 id="title">Rejuvenate</h1>
-				<div id="registerComponent">
-					<FormControl>
-						<TextField
-							id="firstnameTextbox"
-							value={this.state.firstname}
-							onChange={this.updateFirstName}
-							label="First Name"
-						/>
-						<TextField
-							id="lastnameTextbox"
-							value={this.state.lastname}
-							onChange={this.updateLastName}
-							label="Last Name"
-						/>
-						<TextField
-							id="usernameTextbox"
-							value={this.state.username}
-							onChange={this.updateUsername}
-							label="Username"
-							error={this.usernameTakenHelperText.call(this) !== ""}
-						/>
-						<TextField
-							id="passwordTextbox"
-							value={this.state.password}
-							onChange={this.updatePassword}
-							label="Password"
-							type="password"
-							error={this.usernameTakenHelperText.call(this) !== ""}
-							helperText={this.usernameTakenHelperText.call(this)}
-							// helperText={loginConstant.WEAK_PASSWORD_ERROR_MSG}
-						/>
-						<br></br>
-						<Button
-							className="registerButton"
-							onClick = {this.register}
-							variant="contained"
-							disabled={!this.state.firstname
-								|| !this.state.lastname
-								|| !this.state.username
-								|| !this.state.password}
-							disableElevation
-						>
-							Register
-						</Button>
-						<Button
-							className="registerButton"
-							href='/login'
-							variant="contained"
-							disableElevation
-						>
-							Go Back
-						</Button>
-					</FormControl>
+				<div className="container-spaced">
+					<div className="loginComponent">
+						<FormControl>
+							<TextField
+								id="firstnameTextbox"
+								value={this.state.firstname}
+								onChange={this.updateFirstName}
+								label="First Name"
+							/>
+							<TextField
+								id="lastnameTextbox"
+								value={this.state.lastname}
+								onChange={this.updateLastName}
+								label="Last Name"
+							/>
+							<TextField
+								id="usernameTextbox"
+								value={this.state.username}
+								onChange={this.updateUsername}
+								label="Username"
+								error={this.usernameTakenHelperText.call(this) !== ""}
+							/>
+							<TextField
+								id="passwordTextbox"
+								value={this.state.password}
+								onChange={this.updatePassword}
+								label="Password"
+								type="password"
+								error={this.usernameTakenHelperText.call(this) !== ""}
+								helperText={this.usernameTakenHelperText.call(this)}
+								// helperText={loginConstant.WEAK_PASSWORD_ERROR_MSG}
+							/>
+							<br></br>
+							<Button
+								className="registerButton"
+								onClick = {this.register}
+								variant="contained"
+								disabled={!this.state.firstname
+									|| !this.state.lastname
+									|| !this.state.username
+									|| !this.state.password}
+								disableElevation
+							>
+								Register
+							</Button>
+							<Button
+								className="registerButton"
+								href='/login'
+								variant="contained"
+								disableElevation
+							>
+								Go Back
+							</Button>
+						</FormControl>
+					</div>
 				</div>
 				{this.displayMessage()}
 			</div>

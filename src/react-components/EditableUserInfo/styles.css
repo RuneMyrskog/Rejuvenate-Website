@@ -1,9 +1,8 @@
 #userInfo {
-	height: 745px;
-	width: 350px;
-	margin: 10px;
-	float: left;
-	position: relative;
+	width: fit-content;
+	padding: 2rem 2rem;
+	/* float: left;
+	position: relative; */
 }
 
 .userInfoComponent {

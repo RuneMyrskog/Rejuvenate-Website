@@ -1,6 +1,5 @@
 import React from "react";
 import "./styles.css";
-import { getUsersAsList } from "../../userData.js";
 
 import SmallProfileBar from "../../react-components/SmallProfileBar";
 import LoadingDisplay from "../LoadingDisplay";

@@ -9,10 +9,8 @@ import Register from "./views/Register";
 import PasswordReset from "./views/PasswordReset";
 
 import Home from "./views/Home";
-import AdminHome from "./views/AdminHome";
 import AdminDashboard from "./views/AdminDashboard";
 import EditableProfile from "./views/EditableProfile";
-import ViewableProfile from "./views/ViewableProfile";
 import Statistics from "./views/Statistics";
 import CreateStatistics from "./views/CreateStatistic";
 import RecordStatistics from "./views/RecordStatistics";
@@ -83,8 +81,6 @@ class App extends React.Component {
 				<BrowserRouter>
 					<Switch>
 						<Route exact path="/home" render={() => (<Home app={this} follow={this.follow.bind(this)} unfollow={this.unfollow.bind(this)}/>)}/> 
-
-						<Route exact path="/admin home"  render={() => (<AdminHome app={this}/>)} />
 
 						<Route exact path="/admin dashboard" render={() => (<AdminDashboard app={this}/>)} />
 

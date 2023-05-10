@@ -7,6 +7,7 @@ import ProfileUserConnections from "../../react-components/ProfileUserConnection
 import PostList from "../../react-components/PostList";
 import ViewableUserInfo from "../../react-components/ViewableUserInfo";
 import { useParams } from "react-router-dom";
+import CreatePost from "../../react-components/CreatePost";
 
 class EditableProfile extends React.Component {
 	constructor(props) {
@@ -55,21 +56,16 @@ class EditableProfile extends React.Component {
 	render() {
 		return (
 			<div id="profileContainer">
-				{this.userInfo()}
-
-				<div id="middleProfilePageBar">
-					{/* <div className='profilePageComp' id='userStatsPreview'>
-            <h4>{ this.state.firstName }'s Pinned Stats</h4>
-            <span id='viewMoreStatsText'>See more of { this.state.firstName }'s stats</span>
-            </div> */}
-
-					<div className="profilePageComp" id="userPosts">
-						<PostList app={this.props.app} posts={this.state.posts} listComponent={this} />
+				<div id="userProfileInfoContainer">
+					{this.userInfo()}
+					<div className="profileConnectionsWidth topRightMargin10px">
+						<ProfileUserConnections app={this.props.app} editable={this.state.editable} />
 					</div>
 				</div>
-				<div className="profileConnectionsWidth topRightMargin10px">
-					<ProfileUserConnections app={this.props.app} editable={this.state.editable}/>
+				<div className="postListContainer">
+					<PostList title="Posts" app={this.props.app} posts={this.state.posts} listComponent={this} />
 				</div>
+				
 			</div>
 		);
 	}

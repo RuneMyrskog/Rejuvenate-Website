@@ -1,8 +1,6 @@
 import React from 'react';
 import './styles.css';
-import { getUsersAsList } from '../../userData.js';
 
-import SmallProfileBar from '../../react-components/SmallProfileBar';
 import PostList from "../../react-components/PostList";
 
 export default class PostSearchBar extends React.Component {
@@ -30,7 +28,7 @@ export default class PostSearchBar extends React.Component {
 
   componentDidMount() {
     // Initialize posts and comments
-    const users = getUsersAsList();
+     const users = [];
     const posts = [];
     const comments = [];
 
@@ -82,7 +80,7 @@ export default class PostSearchBar extends React.Component {
   removePost(pid) {
     const posts = this.state.posts;
     let i = 0;
-    while (this.state.posts[i].pid != pid) {
+    while (this.state.posts[i].pid !== pid) {
       i++;
     }
     posts.splice(i, 1);
@@ -93,7 +91,7 @@ export default class PostSearchBar extends React.Component {
     const comments = this.state.comments;
     let i = 0;
     console.log(this.state)
-    while (this.state.comments[i].cid != cid) {
+    while (this.state.comments[i].cid !== cid) {
       i++;
     }
     comments.splice(i, 1);

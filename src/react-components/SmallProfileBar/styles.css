@@ -1,12 +1,24 @@
 .smallProfileBar {
-	width: 95%;
 	margin-left: 2.5%;
-	height: 50px;
+	padding: 4px 10px;
 	background-color: #253749;
 	margin-bottom: 10px;
 	border-radius: 10px;
-	float: left;
+	display: flex;
+	justify-content: space-between;
 }
+.smallProfileBarLinkPartial {
+	box-sizing: border-box;
+	height: 100%;
+	border-top-left-radius: 10px;
+	border-bottom-left-radius: 10px;
+	display: flex;
+}
+
+.smallProfileBarLinkPartial:hover {
+	cursor: pointer;
+}
+
 .nav-link {
 	padding: 0px;
 }
@@ -14,15 +26,13 @@
 	margin: 5px;
 	height: 40px;
 	width: 40px;
-	float: left;
 	border-radius: 4px;
-	/* border: 2px solid #202936; */
 }
 
 .smallProfileInfo {
-	float: left;
-	padding-left: 5px;
-	margin: 5px;
+	padding-left: 0.5rem;
+	margin-top: auto;
+	margin-bottom: auto;
 }
 
 .smallProfileName {
@@ -43,30 +53,24 @@
 	height: 100%;
 }
 
-.followUnfollowButton {
-	float: left;
-	width: 20%;
-	height: 100%;
-	font-size: 12px;
-	text-align: center;
-
-	background-color: #f2a365;
-	/* border-top: solid 1px transparent;
-	border-bottom: solid 1px transparent;
-	border-right: solid 1px transparent; */
-	color: #ececec;
-
-	border-top-right-radius: 10px;
-	border-bottom-right-radius: 10px;
-	padding-top: 18px;
-	font-weight: 500;
+.followUnfollowContainer {
+	width: fit-content;
+	display: flex;
+	align-items: center;
+	margin-left: 1rem;
+	margin-top: auto;
+	margin-bottom: auto;
+	font-size: 0.8rem;
 	box-sizing: border-box;
 }
 
-.followUnfollowButton:hover {
-	background-color: rgb(121, 7, 7);
-	border-color: #ececec;
+.followUnfollowSpan {
+	color: #ececec;
 	transition: all 0.1s ease-in-out;
+}
+
+.followUnfollowSpan:hover {
+	color: var(--orange);
 	cursor: pointer;
 }
 
@@ -87,16 +91,4 @@
 	cursor: pointer;
 }
 
-.smallProfileBarLinkPartial {
-	width: 80%;
-	box-sizing: border-box;
-	
-	height: 100%;
-	border-top-left-radius: 10px;
-	border-bottom-left-radius: 10px;
-	float: left;
-}
 
-.smallProfileBarLinkPartial:hover {
-	cursor: pointer;
-}

@@ -4,10 +4,6 @@
 	font-family: "Work Sans", sans-serif;
 }
 
-body {
-	background-color: #202936;
-}
-
 #successMessage {
 	color: greenyellow;
 }
@@ -45,7 +41,7 @@ body {
 .registerButton {
 	display: block;
 	border-radius: 2%;
-	background-color: #f2a365;
+	background-color: var(--orange);;
 	border: solid 1px transparent;
 	color: #ececec;
 	font-size: 18px;
@@ -59,6 +55,6 @@ body {
 
 .registerButton:hover {
 	background-color: transparent;
-	border-color: #f2a365;
+	border-color: var(--orange);;
 	transition: all 0.1s ease-in-out;
 }

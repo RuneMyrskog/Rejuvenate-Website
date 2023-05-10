@@ -1,59 +1,13 @@
 import React from "react";
 import "./styles.css";
-// import { Link } from "react-router-dom";
-// import { IconButton } from "@material-ui/core";
-// import AddCircleIcon from "@material-ui/icons/AddCircle";
-// import FriendList from "../../react-components/FriendList";
 import ProfileUserConnections from "../../react-components/ProfileUserConnections";
 import PostList from "../../react-components/PostList";
 import CreatePost from "../../react-components/CreatePost";
-import { addPost } from "../../actions/post";
-// import { getLoggInUser, getUsers } from "../../userData";
-
-// Set up initial profile state.
-// const users = getUsers();
-// const user = users[getLoggInUser()];
-
-// const followersList = [];
-// for (let i = 0; i < user.numFollowers; i++) {
-// 	const uid = user.followers[i];
-// 	followersList.push({
-// 		uid: uid,
-// 		name: users[uid].firstName + " " + users[uid].lastName,
-// 		username: users[uid].username,
-// 		imgSrc: users[uid].profilePic,
-// 	});
-// }
-
-// const followingList = [];
-// for (let i = 0; i < user.numFollowing; i++) {
-// 	const uid = user.following[i];
-// 	followingList.push({
-// 		uid: uid,
-// 		name: users[uid].firstName + " " + users[uid].lastName,
-// 		username: users[uid].username,
-// 		imgSrc: users[uid].profilePic,
-// 	});
-// }
 
 export default class Home extends React.Component {
 	constructor(props) {
 		super(props);
-		// const loggedInUser = getLoggInUser();
-		// const allPosts = [];
-		// const users = getUsers();
-		// const followingUids = users[loggedInUser].following;
-
-		// // Show only the posts of the logged in user and the users they are following
-		// followingUids.push(loggedInUser);
-		// Object.keys(users).forEach((key) => {
-		// 	if (followingUids.includes(parseInt(key))) {
-		// 		users[key].posts.forEach((post) => {
-		// 			allPosts.push(post);
-		// 		});
-		// 	}
-		// });
-
+	
 		this.state = {
 			userid: null,
 			posts: [],
@@ -90,13 +44,6 @@ export default class Home extends React.Component {
 		});
 	};
 
-	// unfollow(followee) {
-	// 	this.state.following.splice(this.state.following.indexOf(followee), 1);
-	// 	this.setState((state, props) => ({
-	// 		numFollowing: state.numFollowing - 1,
-	// 	}));
-	// }
-
 	appendPostToFeed(post){
 		const posts = this.state.posts;
 		posts.unshift(post); //append as first element
@@ -112,14 +59,18 @@ export default class Home extends React.Component {
 						editable={true}
 					/>
 				</div>
+				
+					
 				<div className="postListContainer">
-					<CreatePost app={this.props.app} appendPostToFeed={this.appendPostToFeed.bind(this)}/>
+					<CreatePost app={this.props.app} appendPostToFeed={this.appendPostToFeed.bind(this)} />
 					<PostList
+						title="Feed"
 						posts={this.state.posts}
 						listComponent={this}
 						app={this.props.app}
 					/>
 				</div>
+				
 			</div>
 		);
 	}

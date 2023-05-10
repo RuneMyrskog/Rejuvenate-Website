@@ -4,7 +4,6 @@
 	scrollbar-width: none;
 	display: flex;
 	flex-direction: row;
-	background-color: #202936;
 }
 
 ::-webkit-scrollbar {
@@ -12,21 +11,22 @@
 }
 
 .friendListContainer {
-	width: 340px;
+	width: 20rem;
 	position: relative;
-	background-color: #202936;
 	float: left;
 	margin-left: 10px;
 	margin-right: 10px;
 	flex: 0 1 auto;
 }
 
+@media (max-width: 900px) {
+	.friendListContainer {
+		display: none;
+	}
+}
+
 .postListContainer {
-	width: 700px;
-	position: relative;
-	background-color: #202936;
 	overflow-y: scroll;
-	float: left;
 	margin-top: 10px;
 	flex: 1 1 auto;
 }

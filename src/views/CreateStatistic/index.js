@@ -58,7 +58,7 @@ export default class CreateStatistic extends React.Component {
 		return (
 			<div id="createStatContainer">
 				<span id="createStatTitle">Create New Statistic</span>
-				<div id="createStatComponent">
+				<div className="loginComponent">
 					<FormControl>
 						<TextField
 							id="statistic-title"

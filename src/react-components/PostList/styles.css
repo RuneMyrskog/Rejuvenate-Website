@@ -5,3 +5,12 @@
 .postListItem {
 	background-color: #2e393d;
 }
+
+.postList {
+	margin-top: 1rem;
+}
+
+.postListTitle {
+	color: white;
+	margin-left: 1rem;
+}

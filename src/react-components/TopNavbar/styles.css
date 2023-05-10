@@ -1,8 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Work+Sans:wght@300&display=swap");
 
 .Navbar {
-	height: 7vh;
-	background-color: #323c50;
+	background-color: var(--navbar-color);
+	z-index: 20;
+}
+@media (max-width: 550px) {
+	.Navbar {
+		padding-left: 0;
+		padding-right: 0;
+	}
 }
 
 .navContent {
@@ -11,10 +17,36 @@
 	justify-content: flex-end;
 	width: 100%;
 }
+.navbar-collapse.collapse.show,
+.navbar-collapse.collapsing {
+	display: flex;
+	justify-content: right;
+}
+
+.navbar-collapse.collapse.show .navContent,
+.navbar-collapse.collapsing .navContent{
+	width: fit-content;
+	padding: 1rem 1rem;
+	margin: 0;
+	display: block;
+	background-color: var(--navbar-color);
+}
+
+#navRightContainer {
+	width: fit-content;
+	margin-right: 0;
+}
+
 
 #title {
 	color: #ececec;
 	font-family: "Work Sans", sans-serif;
+}
+
+@media (max-width: 550px) {
+	#title {
+		display: none;
+	}
 }
 
 

@@ -6,6 +6,8 @@ import { Button } from "react-bootstrap";
 import TextField from "@material-ui/core/TextField";
 import FormControl from "@material-ui/core/FormControl";
 
+import liftingMan from "../../images/man_lifting.png";
+
 // TODO: Convert this to a functional component.
 export default class Login extends React.Component {
 	// I found this helpful:
@@ -67,51 +69,55 @@ export default class Login extends React.Component {
 		return (
 			<div id="loginContainer">
 				<h1 id="title">Rejuvenate</h1>
-				<div id="loginComponent">
-					<FormControl>
-						<TextField
-							id="usernameTextbox"
-							value={this.state.username}
-							onChange={this.updateUsername}
-							label="Username"
-							error={this.helperText.call(this) !== ""}
-						/>
-						<TextField
-							id="passwordTextbox"
-							value={this.state.password}
-							onChange={this.updatePassword}
-							label="Password"
-							type="password"
-							error={this.helperText.call(this) !== ""}
-							helperText={this.helperText.call(this)}
-						/>
-						<br></br>
-						<Button
-							className="loginButton"
-							onClick={this.logIn}
-							variant="contained"
-							disabled={!this.state.username
-								|| !this.state.password}
-						>
-							Log In
-						</Button>
-						<Button
-							className="loginButton"
-							href="/register"
-							variant="contained"
-							
-						>
-							Sign Up
-						</Button>
-						{/* <Button
-							className="loginButton"
-							href="/password reset"
-							variant="contained"
-							
-						>
-							Reset Password
-						</Button> */}
-					</FormControl>
+				<div className="container-spaced">
+					{/* <img className="icon-image" src={liftingMan} alt="liftingMan"></img> */}
+
+					<div className="loginComponent">
+						<FormControl>
+							<TextField
+								id="usernameTextbox"
+								value={this.state.username}
+								onChange={this.updateUsername}
+								label="Username"
+								error={this.helperText.call(this) !== ""}
+							/>
+							<TextField
+								id="passwordTextbox"
+								value={this.state.password}
+								onChange={this.updatePassword}
+								label="Password"
+								type="password"
+								error={this.helperText.call(this) !== ""}
+								helperText={this.helperText.call(this)}
+							/>
+							<br></br>
+							<Button
+								className="loginButton"
+								onClick={this.logIn}
+								variant="contained"
+								disabled={!this.state.username
+									|| !this.state.password}
+							>
+								Log In
+							</Button>
+							<Button
+								className="loginButton"
+								href="/register"
+								variant="contained"
+								
+							>
+								Sign Up
+							</Button>
+							{/* <Button
+								className="loginButton"
+								href="/password reset"
+								variant="contained"
+								
+							>
+								Reset Password
+							</Button> */}
+						</FormControl>
+					</div>
 				</div>
 
 				<p id="loginAsUserGreeting">This is a project website developed with the MERN stack, you can try it out by logging in with "user" as the username and password, or signing up!</p>

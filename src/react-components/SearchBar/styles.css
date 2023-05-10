@@ -2,8 +2,9 @@
 	height: 40px;
 	padding-top: 5px;
 	position: relative;
-	margin-left: 10px;
 	font-size: 16px;
+	margin-right: auto;
+	margin-left: 0.2rem;
 }
 
 #searchBar input {

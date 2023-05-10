@@ -5,15 +5,14 @@ body {
 #createStatContainer {
 	width: 100%;
 	height: 100%;
+	display: flex;
+	flex-direction: column;
 	text-align: center;
 }
 
 #createStatTitle {
 	color: #ececec;
-	font-size: 40px;
-	margin-left: 20px;
-	margin-top: 20px;
-	font-weight: 300;
+	font-size: 2rem;
 }
 
 #createStatComponent {

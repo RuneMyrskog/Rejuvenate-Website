@@ -1,6 +1,14 @@
+:root {
+
+	--background-color: #202936;
+	--background-color-light: #253749;
+	--orange: #f2a365;
+	--navbar-color: #323c50;
+}
+
 body {
 	margin: 0;
-	background-color: #202936;
+	background-color: var(--background-color);
 }
 
 button {
@@ -9,6 +17,17 @@ button {
 
 .loadingScreenText {
 	margin: 10px;
-	color: #f2a365;
+	color: var(--orange);
 }
 
+
+.container-column {
+	display: flex;
+	flex-direction: column;
+}
+
+.container-spaced {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
