@@ -6,12 +6,22 @@
 	flex: 1;
 	flex-direction: row;
 }
-
+.black-icon {
+	fill: black;
+}
+.large-icon {
+	width: 10rem;
+	height: 10rem;
+}
 ::-webkit-scrollbar {
 	display: none;
 }
 
 .friendListContainer {
+	display: flex;
+	flex-direction: column;
+	gap: 5rem;
+	align-items: center;
 	width: 20rem;
 	position: relative;
 	float: left;

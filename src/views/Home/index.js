@@ -3,6 +3,7 @@ import "./styles.css";
 import ProfileUserConnections from "../../react-components/ProfileUserConnections";
 import PostList from "../../react-components/PostList";
 import CreatePost from "../../react-components/CreatePost";
+import { DumbellIcon } from "../../react-components/Icons";
 
 export default class Home extends React.Component {
 	constructor(props) {
@@ -58,6 +59,8 @@ export default class Home extends React.Component {
 						app={this.props.app}
 						editable={true}
 					/>
+
+					<DumbellIcon id="left-dumbell-icon" className="black-icon large-icon"/>
 				</div>
 				
 					

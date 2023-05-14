@@ -1,3 +1,11 @@
 .icon {
     fill: var(--orange);
 }
+
+.black-icon {
+    fill: black;
+}
+
+.orange-icon {
+    fill: var(--orange);
+}

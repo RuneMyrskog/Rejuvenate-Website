@@ -7,7 +7,6 @@ import ProfileUserConnections from "../../react-components/ProfileUserConnection
 import PostList from "../../react-components/PostList";
 import ViewableUserInfo from "../../react-components/ViewableUserInfo";
 import { useParams } from "react-router-dom";
-import CreatePost from "../../react-components/CreatePost";
 
 class EditableProfile extends React.Component {
 	constructor(props) {
@@ -44,7 +43,7 @@ class EditableProfile extends React.Component {
 
 	userInfo() {
 		if (!this.state.editable) {
-			return <ViewableUserInfo user={this.state.user}/>
+			return <ViewableUserInfo app={this.props.app} user={this.state.user}/>
 		}
 
 		return (<EditableUserInfo
@@ -58,9 +57,9 @@ class EditableProfile extends React.Component {
 			<div id="profileContainer">
 				<div id="userProfileInfoContainer">
 					{this.userInfo()}
-					<div className="profileConnectionsWidth topRightMargin10px">
+					{/* <div className="profileConnectionsWidth topRightMargin10px">
 						<ProfileUserConnections app={this.props.app} editable={this.state.editable} />
-					</div>
+					</div> */}
 				</div>
 				<div className="postListContainer">
 					<PostList title="Posts" app={this.props.app} posts={this.state.posts} listComponent={this} />

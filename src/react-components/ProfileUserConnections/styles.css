@@ -1,5 +1,6 @@
 #userConnectionsList {
 	width: 100%;
+	max-height: 50vh;
 	overflow-y: scroll;
 	padding-top: 10px;
 }

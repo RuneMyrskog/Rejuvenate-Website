@@ -71,7 +71,7 @@ export default class Login extends React.Component {
 			<div id="loginContainer">
 				<h1 id="title">Rejuvenate</h1>
 				<div className="container-spaced">
-					<DumbellIcon id="left-dumbell-icon"/>
+					<DumbellIcon id="left-dumbell-icon" className="orange-icon"/>
 
 					<div className="loginComponent">
 						<FormControl>
@@ -120,7 +120,7 @@ export default class Login extends React.Component {
 						</FormControl>
 						
 					</div>
-					<DumbellIcon id="right-dumbell-icon" />
+						<DumbellIcon id="right-dumbell-icon" className="orange-icon" />
 				</div>
 
 				<p id="loginAsUserGreeting">This is a project website developed with the MERN stack, you can try it out by logging in with "user" as the username and password, or signing up!</p>

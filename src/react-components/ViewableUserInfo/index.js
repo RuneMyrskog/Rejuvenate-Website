@@ -6,20 +6,46 @@ import FavoriteThing from '../FavoriteThing';
 export default class ViewableUserInfo extends React.Component {
 
   constructor(props) {
+
+   
     super(props)
+    this.handleFollow = props.app.follow.bind(props.app);
+    this.handleUnfollow = props.app.unfollow.bind(props.app);
+
+  }
+
+  unfollowButton() {
+    return (
+      <div onClick={() => this.handleUnfollow(this.props.user)} id='bigProfileButton' >Unfollow</div >
+    )
+  }
+
+  followButton () {
+    return (
+      <div onClick={() => this.handleFollow(this.props.user)} id='bigProfileButton' >Follow</div >
+    )
+  }
+  followUnfollowButton() {
+    console.log()
+    let followed = this.props.app.state.following.findIndex(curruser => curruser._id == this.props.user._id) != -1;
+    return followed ? this.unfollowButton() : this.followButton()
   }
 
   displayViewableBio() {
+    let bio = this.props.user.bio;
+    if (bio == "" || bio == null) {
+      bio = "user has not set their bio yet";
+    }
     return (
       <div id='viewableBio' className='bio'>
-        <span className='breakLongWords'>{ this.props.user.bio }</span>
+        <span className='breakLongWords'>{ bio }</span>
       </div>
 
     )
   }
 
   render(){
-    if (this.props.user === null) { //post failed to load, return null to not display this post
+    if (this.props.user === null || this.props.app.state.following === null) { //post failed to load, return null to not display this post
       return <LoadingDisplay />;
     } 
     //console.log("USERESLDF: " + this.props.user)
@@ -36,13 +62,7 @@ export default class ViewableUserInfo extends React.Component {
           } alt="profile pic" />
           <h1>{ firstname + " " + lastname }</h1>
           <h3>@{ username }</h3>
-          <div onClick={ this.props.toggleFollow } id='bigProfileButton'>{ this.props.canFollow ? 'Follow' : 'Unfollow' }</div>
-          {/*
-            <ul>
-            <li><b>Followers</b><br /><span className='follow-amount'>{ numFollowers }</span></li>
-            <li><b>Following</b><br /><span className='follow-amount'>{ numFollowing }</span></li>
-          </ul>
-          */}
+          {this.followUnfollowButton()}
           { this.displayViewableBio() }
         </div>
       </div>

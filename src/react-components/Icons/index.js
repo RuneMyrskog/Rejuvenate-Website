@@ -4,7 +4,7 @@ import './styles.css';
 export class DumbellIcon extends React.Component {
     render() {
         return (
-            <svg id={this.props.id} className="icon dumbell-icon" xmlns="http://www.w3.org/2000/svg"
+            <svg id={this.props.id} className={"dumbell-icon " + this.props.className} xmlns="http://www.w3.org/2000/svg"
                 width="50px" height="50px" viewBox="0 0 500.043 500.043">
                 <g>
                     <g>
