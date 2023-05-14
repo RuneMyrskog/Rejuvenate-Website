@@ -1,6 +1,5 @@
 #userConnectionsList {
 	width: 100%;
-	background-color: #202936;
 	overflow-y: scroll;
 	padding-top: 10px;
 }
@@ -9,14 +8,17 @@
 	height: 30px;
 	width: 100%;
 	font-weight: 300;
-	background-color: #202936;
 	color: #ececec;
 	position: relative;
+	padding-bottom: 5px;
+	color: black;
+	font-weight: 500;
+	margin-top: 1rem;
 }
 
 .selectedNav {
-	color: #f2a365;
-	border-bottom: solid 2px #f2a365;
+	color: black;
+	border-bottom: solid 2px black;
 }
 
 #userConnectionsNav ul {
@@ -35,13 +37,8 @@
 	box-sizing: border-box;
 	position: relative;
 	font-size: 16px;
-	padding-top: 6px;
 }
 
 #userConnectionsNav li:hover {
 	cursor: pointer;
-}
-
-.blackBottomBorder {
-	
 }

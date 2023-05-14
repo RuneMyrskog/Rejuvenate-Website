@@ -67,6 +67,7 @@ export default class Login extends React.Component {
 
 	render() {
 		return (
+			<div id="loginScreenBackground">
 			<div id="loginContainer">
 				<h1 id="title">Rejuvenate</h1>
 				<div className="container-spaced">
@@ -124,6 +125,7 @@ export default class Login extends React.Component {
 
 				<p id="loginAsUserGreeting">This is a project website developed with the MERN stack, you can try it out by logging in with "user" as the username and password, or signing up!</p>
 			</div>
+		</div>
 		);
 	}
 }

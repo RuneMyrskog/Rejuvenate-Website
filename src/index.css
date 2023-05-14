@@ -2,13 +2,22 @@
 
 	--background-color: #202936;
 	--background-color-light: #253749;
-	--orange: #f2a365;
-	--navbar-color: #323c50;
+	--orange: #ee924cc1;
+	--navbar-color: black;
+	--background-gradient-body: linear-gradient( black 35%, var(--orange));
+	--post-list-color: black;
+	--post-list-border: 1px solid rgba(255, 255, 255, 0.295);
 }
 
 body {
+	height: 100vh;
 	margin: 0;
-	background-color: var(--background-color);
+	background-color: var(--orange);
+	background-repeat: no-repeat;
+}
+
+#root {
+	height: 100%;
 }
 
 button {

@@ -3,17 +3,16 @@
 	width: 100%;
 	height: auto;
 	min-height: 46vh;
-	background-color: #202936;
 }
 
 .createPostComponent {
 	height: auto;
 	min-height: 46vh;
 	margin-left: 1%;
-	border: 6px solid #253749;
+	border: var(--post-list-border);
 	border-radius: 10px;
 	width: 98%;
-	background-color: #253749;
+	background-color: var(--post-list-color);
 }
 
 .createPost {

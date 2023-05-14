@@ -1,8 +1,9 @@
 #homeContainer {
-	height: 93vh;
+	background-size: 100vh;
 	overflow-y: hidden;
 	scrollbar-width: none;
 	display: flex;
+	flex: 1;
 	flex-direction: row;
 }
 
@@ -14,8 +15,7 @@
 	width: 20rem;
 	position: relative;
 	float: left;
-	margin-left: 10px;
-	margin-right: 10px;
+	padding: 0 1rem;
 	flex: 0 1 auto;
 }
 
@@ -27,6 +27,7 @@
 
 .postListContainer {
 	overflow-y: scroll;
+	max-height: 90vh;
 	margin-top: 10px;
 	flex: 1 1 auto;
 }

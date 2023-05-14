@@ -1,13 +1,12 @@
 #statViewContainer {
 	position: absolute;
 	width: 100%;
-	background-color: #202936;
 }
 
 .categoryContainer {
-	background-color: #253749;
 	margin: 20px;
 	border-radius: 10px;
+	background-color: black;
 }
 
 .statsContainer {

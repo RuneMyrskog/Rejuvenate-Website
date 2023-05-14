@@ -29,7 +29,7 @@ export default class TopNavbar extends React.Component {
 		return (
 			<div className="topRow">
 				<BrowserRouter>
-					<Navbar className="Navbar" expand="lg" sticky="top">
+					<Navbar className="Navbar" expand="lg" sticky="top" variant="dark">
 						<Navbar.Brand href="/home" id="title">
 							Rejuvenate
 						</Navbar.Brand>

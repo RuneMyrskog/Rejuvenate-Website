@@ -1,11 +1,11 @@
 .postEntryContainer {
 	margin-left: 1%;
-	border: 6px solid #253749;
+	border: var(--post-list-border);
 	padding: 30px;
 	border-radius: 10px;
 	margin-bottom: 4%;
 	width: 98%;
-	background-color: #253749;
+	background-color: var(--post-list-color);
 	padding: 25px;
 	position: relative;
 }

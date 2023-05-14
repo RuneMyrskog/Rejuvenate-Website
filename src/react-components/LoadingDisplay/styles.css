@@ -8,5 +8,6 @@
 
 .loadingDisplayText {
 	padding: 10px;
-	color: #f2a365;
+	color: white;
+    font-weight: bold;
 }
