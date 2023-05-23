@@ -5,9 +5,10 @@ import LoadingDisplay from "../../react-components/LoadingDisplay";
 export default class UserInfo extends React.Component {
 	constructor(props) {
 		super(props)
+		console.log("User: " , props.user);
 		this.state = {
-			canRemovefavorites: false,
-			canAddfavorites: false,
+			profilePicture: props.user.profilePicture,
+			bio: props.user.bio,
 		};
 	}
 	
@@ -15,16 +16,20 @@ export default class UserInfo extends React.Component {
 	displayViewableBio() {
 		return (
 			<div id="viewableBio" className="bio">
-				<span className="breakLongWords">{this.props.user.bio}</span>
+				<span className="breakLongWords">{this.state.bio}</span>
 			</div>
 		);
+	}
+
+	onChange(e) {
+		this.setState({bio: e.target.value})	
 	}
 
 	displayEditableBio() {
 		return (
 			<div id="editableBioContainer">
-				<textarea id="editableBio" maxLength="100" className="bio" type="text">
-					{this.props.user.bio}
+				<textarea value={this.state.bio} onChange={this.onChange.bind(this)} id="editableBio" maxLength="100" className="bio" type="text">
+					
 				</textarea>
 				<span id="bioCharLimitNotice">100 character limit</span>
 			</div>
@@ -32,14 +37,29 @@ export default class UserInfo extends React.Component {
 	}
 
 	saveEdits() {
-		//this.props.setBio(document.querySelector("#editableBio").value);
-		let newBio = document.querySelector("#editableBio").value
-		this.props.user.bio = newBio
-		this.setState((state, props) => ({
-			editable: false,
-			canAddfavorites: false,
-			canRemovefavorites: false,
-		}));
+		this.setState({editable: false})
+		// e.preventDefault();
+		var data = new FormData();
+		if (this.state.image) {
+			data.append("image", this.state.image);
+		}
+		data.append("bio", this.state.bio);
+		console.log("bio: ", this.state.bio);
+		console.log("sending update to api: ", data);
+		fetch(`/api/users/updateprofile`, {
+			method: "post",
+			body: data,
+		})
+			.then((res) => res.json())
+			.then((json) => {
+				let user = json.user;
+				this.setState({
+					image: null,
+					profilePicture: user.profilePicture,
+					bio: user.bio
+				});
+				console.log("updated user");
+			});
 	}
 	
 
@@ -47,8 +67,39 @@ export default class UserInfo extends React.Component {
 		if (this.state.editable) {
 			this.saveEdits();
 		} else {
-			this.enableRemovingfavorites();
+			this.setState({editable: true});
 		}
+	}
+
+	handleImageUpload(e) {
+		var fileUpload = e.target;
+		console.log("yes");
+		console.log(e.target);
+		if ("files" in fileUpload) {
+			console.log("iwuhfsd");
+			if (fileUpload.files.length > 0) {
+				var image = fileUpload.files[0];
+				this.setState({ image: image });
+			}
+		}
+	}
+
+	changePhotoButton(){
+		return (
+			<>
+			<input
+				type="file"
+				accept="/image/*"
+				name="picture"
+				id="file"
+				className="inputPicture"
+				onChange={this.handleImageUpload.bind(this)}
+			/>
+			<label htmlFor="file" id="uploadImageButton">
+				Upload Image
+			</label>
+			</>
+		);
 	}
 
 	
@@ -63,32 +114,34 @@ export default class UserInfo extends React.Component {
 			firstname,
 			lastname,
 			username,
-			profilePicture,
 		} = this.props.user;
 
 		return (
-			<div id="userInfo">
-				{/* Need to pull image, name, username, list of followers, list of users following, bio */}
+
 				<div className="userInfoComponent" id="userInfoMain">
-					<img id="leftProfilePicture" src={
-						profilePicture ? 
-							profilePicture.image_url
-							: "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png"
-					} alt="profile pic" />
-					<h1>{firstname + " " + lastname}</h1>
-					<h3>@{username}</h3>
-					{/*<ul>
-            <li><b>Followers</b><br /><span className='follow-amount'>{ numFollowers }</span></li>
-            <li><b>Following</b><br /><span className='follow-amount'>{ numFollowing }</span></li>
-          </ul>*/}
-					<div onClick={this.toggleEditState.bind(this)} id="bigProfileButton">
-						{this.state.editable ? "Save Changes" : "Edit Profile"}
+					<div>
+						<img id="leftProfilePicture" src={
+						this.state.image ? URL.createObjectURL(this.state.image) :
+							this.state.profilePicture ? 
+								this.state.profilePicture.image_url
+								: "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png"
+						} alt="profile pic" />
+						<h1>{firstname + " " + lastname}</h1>
+						<h3>@{username}</h3>
 					</div>
-					{this.state.editable
-						? this.displayEditableBio()
-						: this.displayViewableBio()}
+
+					<div>
+
+						<div onClick={this.toggleEditState.bind(this)} id="bigProfileButton">
+							{this.state.editable ? "Save Changes" : "Edit Profile"}
+						</div>
+						{this.state.editable
+							? this.displayEditableBio()
+							: this.displayViewableBio()}
+						{this.state.editable ? this.changePhotoButton() : null}
+					</div>
 				</div>
-			</div>
+			
 		);
 	}
 }

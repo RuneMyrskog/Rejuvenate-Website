@@ -57,6 +57,7 @@ export default class CreatePost extends React.Component {
 		data.append("text", this.state.text);
 		data.append("userid", this.props.app.state.user._id);
 
+		console.log("dataasfas: ", data);
 		fetch(`/api/posts`, {
 			method: "post",
 			body: data,

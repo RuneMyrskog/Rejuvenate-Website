@@ -14,7 +14,7 @@ export default class PostList extends React.Component {
 	render() {
 		return (
 			<ListGroup className="postList">
-				<h2 className="postListTitle">{this.props.title}</h2>
+				{/* <h2 className="postListTitle">{this.props.title}</h2> */}
 				{this.props.posts.map((post) => (
 					<PostEntry
 						key={uuid()} /* unique id required to help React render more efficiently when we modify the students list. */

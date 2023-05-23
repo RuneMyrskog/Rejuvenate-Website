@@ -1,18 +1,21 @@
 :root {
 
-	--background-color: #202936;
-	--background-color-light: #253749;
+	--background-color: #17181c;
+	--background-color-light: #1e1f23;
+	--background-color-extra-light: #27282f;
 	--orange: #fb994e;
-	--navbar-color: black;
-	--background-gradient-body: linear-gradient( black 35%, var(--orange));
+	--navbar-color: var(--background-color-light);
 	--post-list-color: black;
 	--post-list-border: 1px solid rgba(255, 255, 255, 0.295);
+	--border-radius: 0.3rem;
+	--section-spacing: 0.7rem;
 }
 
 body {
+	color: white;
 	height: 100vh;
 	margin: 0;
-	background-color: var(--orange);
+	background-color: var(--background-color);
 	background-repeat: no-repeat;
 }
 

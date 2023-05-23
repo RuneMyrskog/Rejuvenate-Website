@@ -60,18 +60,20 @@ export default class Home extends React.Component {
 						editable={true}
 					/>
 
-					<DumbellIcon id="left-dumbell-icon" className="black-icon large-icon"/>
+					
 				</div>
 				
+				
+					<div className="postListContainer">
+						
+						<CreatePost app={this.props.app} appendPostToFeed={this.appendPostToFeed.bind(this)} />
+						<PostList
+							title="Feed"
+							posts={this.state.posts}
+							listComponent={this}
+							app={this.props.app}
+						/>
 					
-				<div className="postListContainer">
-					<CreatePost app={this.props.app} appendPostToFeed={this.appendPostToFeed.bind(this)} />
-					<PostList
-						title="Feed"
-						posts={this.state.posts}
-						listComponent={this}
-						app={this.props.app}
-					/>
 				</div>
 				
 			</div>

@@ -1,7 +1,6 @@
 import React from 'react';
 import './styles.css';
 import LoadingDisplay from "../../react-components/LoadingDisplay";
-import FavoriteThing from '../FavoriteThing';
 
 export default class ViewableUserInfo extends React.Component {
 

@@ -13,7 +13,7 @@
 }
 #loginScreenBackground {
 	height: 100vh;
-	background-image: var(--background-gradient-body);
+	background-color: var(--background-color);
 }
 
 #loginContainer {
@@ -25,6 +25,10 @@
 	flex-direction: column;
 	justify-content: space-around;
 	text-align: center;
+}
+
+.loginComponent {
+	background-color: var(--background-color);
 }
 
 #loginContainer h1 {
@@ -64,9 +68,14 @@
 	padding-right: 1.5rem;
 	padding-top: 10px;
 	padding-bottom: 10px;
-
-	background-color: #ececec;
+    background-color: var(--background-color-light);
 }
+
+.MuiFormLabel-root, .MuiInputBase-input:focus, 
+input, .MuiInputBase-root, .Mui-focused {
+	color: white;
+}
+
 
 .loginButton {
 	display: block;
@@ -87,4 +96,5 @@
 	background-color: transparent;
 	border-color: #f2a365;
 	transition: all 0.1s ease-in-out;
+	color: white;
 }

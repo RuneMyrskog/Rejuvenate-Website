@@ -7,6 +7,7 @@ import ProfileUserConnections from "../../react-components/ProfileUserConnection
 import PostList from "../../react-components/PostList";
 import ViewableUserInfo from "../../react-components/ViewableUserInfo";
 import { useParams } from "react-router-dom";
+import LoadingDisplay from "../../react-components/LoadingDisplay";
 
 class EditableProfile extends React.Component {
 	constructor(props) {
@@ -42,10 +43,16 @@ class EditableProfile extends React.Component {
 	}
 
 	userInfo() {
+		if (this.state.user == null){
+			return <LoadingDisplay/>
+		}
+
+
 		if (!this.state.editable) {
 			return <ViewableUserInfo app={this.props.app} user={this.state.user}/>
 		}
 
+		
 		return (<EditableUserInfo
 			user={this.state.user}
 			setBio={this.setBio.bind(this)}

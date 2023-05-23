@@ -11,9 +11,6 @@ import PasswordReset from "./views/PasswordReset";
 import Home from "./views/Home";
 import AdminDashboard from "./views/AdminDashboard";
 import EditableProfile from "./views/EditableProfile";
-import Statistics from "./views/Statistics";
-import CreateStatistics from "./views/CreateStatistic";
-import RecordStatistics from "./views/RecordStatistics";
 
 import TopNavbar from "./react-components/TopNavbar";
 import LoadingDisplay from "./react-components/LoadingDisplay";
@@ -61,7 +58,7 @@ class App extends React.Component {
 		.then(json => {
 			
 			const following = this.state.following;
-			let index = following.findIndex(user => user._id == json.follow._id)
+			let index = following.findIndex(user => user._id === json.follow._id)
 			following.splice(index, 1);
 			this.setState({following: following})
 		})
@@ -88,15 +85,6 @@ class App extends React.Component {
 
 						<Route exact path="/otherUserProfile" render={() => (<EditableProfile app={this}/>)} /> 
 
-						{/* <Route exact path="/password reset" render={() => (<PasswordReset app={this}/>)} /> */}
-
-						<Route exact path="/statistics" render={() => (<Statistics app={this}/>)} />
-
-						<Route exact path="/statistics/create" render={() => (<CreateStatistics app={this}/>)} />
-
-						<Route exact path="/statistics/record" render={() => (<RecordStatistics app={this}/>)} />
-						
-						{/* <Route exact path="/settings" render={() => (<Settings app={this}/>)} /> */}
 					</Switch>
 				</BrowserRouter>
 			</>

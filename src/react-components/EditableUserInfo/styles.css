@@ -1,16 +1,15 @@
 #userInfo {
 	width: fit-content;
 	padding: 2rem 2rem;
-	/* float: left;
-	position: relative; */
 }
 
 .userInfoComponent {
 	margin: 0px;
-	margin-bottom: 10px;
 	padding: 20px;
 	text-align: center;
 }
+
+
 
 #userInfoMain img {
 	border-radius: 50%;
@@ -60,7 +59,7 @@
 	font-size: 20px;
 }
 
-.bio {
+/* .bio {
 	background-color: #253749;
 	border-radius: 4px;
 	padding: 7px 15px;
@@ -70,7 +69,7 @@
 	color: #ececec;
 	resize: none;
 	padding-bottom: 0px;
-}
+} */
 
 .breakLongWords {
 	overflow-wrap: break-word;
@@ -99,29 +98,7 @@
 	position: relative;
 }
 
-#favouriteThings {
-	padding: 10px;
-	height: 215px;
-}
 
-#favouriteThingsContainer {
-	width: 310px;
-	height: 140px;
-	margin: 0;
-	padding: 10px;
-	padding-right: 0;
-	background-color: #253749;
-	overflow-x: auto;
-	overflow-y: hidden;
-	white-space: nowrap;
-}
-
-#favouriteThings h4 {
-	font-size: 20px;
-	/* margin: 5px 0 10px 5px; */
-	color: #ececec;
-	font-weight: normal;
-}
 
 #editProfileText {
 	font-size: 12px;
@@ -136,50 +113,4 @@
 	cursor: pointer;
 }
 
-#addFavouriteThingsButton {
-	margin-top: 5px;
-	margin-right: 10px;
-	width: 70px;
-	height: 105px;
-	border: 2px dashed #202936;
-	box-sizing: border-box;
-	float: left;
-	padding-top: 15px;
-	font-size: 40px;
-	font-weight: lighter;
-	padding-left: 22px;
-}
 
-#addFavouriteThingsButton:hover {
-	font-weight: normal;
-	cursor: pointer;
-	border: 3px solid;
-	font-weight: normal;
-	padding-top: 14px;
-	padding-left: 21px;
-	background-color: #48575e;
-}
-
-/* #removeFavouriteThingsButton {
-  margin-top: 5px;
-  margin-right: 10px;
-  width: 70px;
-  height: 105px;
-  border: 2px dashed #202936;
-  box-sizing: border-box;
-  float: left;
-  padding-top: 12px;
-  font-size: 40px;
-}
-
-#backText {
-  margin-left: 21px;
-  font-weight: normal;
-  font-size: 18px;
-}
-
-#removeFavouriteThingsButton:hover {
-  font-weight: normal;
-  cursor: pointer;
-  border: 2.5px solid;
-} */

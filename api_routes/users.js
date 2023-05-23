@@ -2,9 +2,21 @@ const express = require("express");
 const { ObjectID } = require("mongodb");
 const { User, Statistic, Post } = require("../models");
 const { mongoChecker, isMongoError } = require("./helpers/mongo_helpers");
-
+const cloudinary = require('cloudinary');
+const multipart = require('connect-multiparty');
 const router = express.Router();
 const log = console.log;
+
+const CLOUDINARY_API_KEY = "193735732249155";
+const CLOUDINARY_API_SECRET = process.env.CLOUDINARY_API_SECRET || "HkfQZDE4wfICeSlDf1igVz5ta1M";
+
+cloudinary.config({
+	cloud_name: 'ooglyboogly343',
+	api_key: CLOUDINARY_API_KEY,
+	api_secret: CLOUDINARY_API_SECRET
+});
+
+const multipartMiddleware = multipart();
 
 /**
  * Get the current user calling this route.
@@ -304,7 +316,7 @@ router.get("/api/users/:id/feed", mongoChecker, async (req, res) => {
 /**
  * Get all posts for this user.
  */
-router.get("/api/users/:id/posts", mongoChecker, async (req, res) => {
+router.get("/api/users/:id/posts", mongoChecker,  async (req, res) => {
 	const userid = req.params.id;
 
 	if (!ObjectID.isValid(userid)) {
@@ -388,6 +400,77 @@ router.get("/api/users/:id/statistics", mongoChecker, async (req, res) => {
 		} else {
 			res.status(400).send();
 		}
+	}
+});
+
+
+/**
+ * Update this users profile with the fields
+ */
+router.post("/api/users/updateprofile", multipartMiddleware, mongoChecker, async (req, res) => {
+	const bio = req.body.bio;
+	log("updating user with bio: ", bio);
+	//can only update when logged in
+	if (!req.session.user) {
+		res.status(401).send("Unauthorized");
+		return;
+	}
+	var user = await User.findById(req.session.user);
+
+	if (!user) {
+		res.status(404).send();
+		return;
+	}
+
+	if (req.files && "image" in req.files) {
+		try {
+			log("found image in request body, uploading to cloudinary...")
+			cloudinary.uploader.upload(req.files.image.path, async (result) => {
+				var image = {
+					image_id: result.public_id,
+					image_url: result.url,
+					created_at: new Date(),
+				};
+			
+			
+				user.profilePicture = image;
+				user.bio = bio;
+
+				try {
+					const userResult = await user.save();
+					res.status(200).json({ user: userResult });
+				}
+				catch (error) {
+					log(error);
+					if (isMongoError(error)) {
+						res.status(500).send("Internal Server Error");
+					} else {
+						res.status(400).send();
+					}
+				}	
+			});
+
+		} catch (error) {
+			log(error);
+			res.status(500).send("Problem uploading to cloudinary");
+			return;
+		}
+	}
+	else {
+		//update bio only
+		user.bio = bio;
+		try {
+			const userResult = await user.save();
+			res.status(200).json({ user: userResult });
+		}
+		catch (error) {
+			log(error);
+			if (isMongoError(error)) {
+				res.status(500).send("Internal Server Error");
+			} else {
+				res.status(400).send();
+			}
+		}	
 	}
 });
 

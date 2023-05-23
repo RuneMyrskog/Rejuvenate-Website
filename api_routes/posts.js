@@ -40,9 +40,7 @@ router.post(
 		const tag = req.body.tag;
 		const text = req.body.text;
 
-		console.log(req.body);
-		console.log(req.body.userid);
-		console.log(req.session.user);
+		log("creating new post: ", req.body.text);
 		if (req.session.user !== userid) {
 			res.status(401).send("Unauthorized");
 			return;

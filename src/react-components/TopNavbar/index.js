@@ -50,9 +50,6 @@ export default class TopNavbar extends React.Component {
 								<Nav.Link id="topNavBarOption" href={"/profile/" + client_userid}>
 									Profile
 								</Nav.Link>
-								<Nav.Link id="topNavBarOption" href="/statistics">
-									Statistics
-								</Nav.Link>
 								<Nav.Link
 									id="topNavBarOption"
 									onClick={this.logout}

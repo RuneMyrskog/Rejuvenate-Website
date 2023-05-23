@@ -238,19 +238,22 @@ export default class PostEntry extends React.Component {
 			return (
 				<div className="postEntryContainer">
 					{this.props.removable ? this.displayRemoveButton() : ""}
-					<div className="tag">{tag}</div>
-					<div className="user">
-						<img
-							className="avatar"
-							src={
-								this.state.postUser.profilePicture
-									? this.state.postUser.profilePicture.image_url
-									: "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png"
-							}
-							alt=""
-						/>
-						<div className="username">{this.state.postUser.username}</div>
+					<div className="flex-spaced">
+						<div className="user">
+							<img
+								className="avatar"
+								src={
+									this.state.postUser.profilePicture
+										? this.state.postUser.profilePicture.image_url
+										: "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png"
+								}
+								alt=""
+							/>
+							<div className="username">{this.state.postUser.username}</div>
+						</div>
+						<div className="tag">{tag}</div>
 					</div>
+
 					<div className="text">{text}</div>
 					<div className="imageContainer">{imageContainer}</div>
 

@@ -12,14 +12,14 @@
 	color: #ececec;
 	position: relative;
 	padding-bottom: 5px;
-	color: black;
+	color: white;
 	font-weight: 500;
 	margin-top: 1rem;
 }
 
 .selectedNav {
-	color: black;
-	border-bottom: solid 2px black;
+	color: white;
+	border-bottom: solid 2px white;
 }
 
 #userConnectionsNav ul {

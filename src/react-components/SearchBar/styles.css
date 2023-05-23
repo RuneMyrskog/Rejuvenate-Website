@@ -14,12 +14,9 @@
 	padding-bottom: 3px;
 	width: 260px;
 	height: 30px;
-	background-color: #ececec;
-	color: #253749;
 }
-
 #searchBar input::placeholder {
-	color: #253749;
+
 	opacity: 70%;
 }
 
@@ -34,7 +31,7 @@
 	top: -10px;
 	left: 0px;
 	z-index: -1;
-	background-color: #252d3d;
+	background-color: var(--background-color-extra-light);
 	box-shadow: #202936 0 0 10px;
 	border-bottom-left-radius: 20px;
 	border-bottom-right-radius: 20px;

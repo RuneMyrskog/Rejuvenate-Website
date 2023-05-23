@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Work+Sans:wght@300&display=swap");
 
 .Navbar {
-	background-color: var(--navbar-color);
+	background-color: var(--background-color-light);
 	z-index: 20;
 }
 @media (max-width: 550px) {
@@ -11,8 +11,11 @@
 	}
 }
 
-.navbar-light .navbar-toggler-icon {
+.navbar-toggler, .navbar-toggler:focus, .navbar-toggler:active {
+	outline: none;
+	border-color: none;
 }
+
 .navContent {
 	display: flex;
 	flex-flow: row wrap;
