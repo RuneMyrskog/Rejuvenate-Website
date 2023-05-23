@@ -97,7 +97,7 @@ export default class Register extends React.Component {
 	render() {
 		console.log(this.state)
 		return (
-			<div id="loginContainer">
+			<div id="registerContainer">
 				<h1 id="title">Rejuvenate</h1>
 				<div className="container-spaced">
 					<DumbellIcon id="left-dumbell-icon" />

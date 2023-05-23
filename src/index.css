@@ -1,14 +1,15 @@
 :root {
-
+	--post-list-spacing: 0.5rem;
 	--background-color: #17181c;
 	--background-color-light: #1e1f23;
 	--background-color-extra-light: #27282f;
+	--login-container-color:#474856;
 	--orange: #fb994e;
 	--navbar-color: var(--background-color-light);
 	--post-list-color: black;
 	--post-list-border: 1px solid rgba(255, 255, 255, 0.295);
 	--border-radius: 0.3rem;
-	--section-spacing: 0.7rem;
+	--section-spacing: 0.8rem;
 }
 
 body {

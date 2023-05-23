@@ -27,9 +27,6 @@
 	text-align: center;
 }
 
-.loginComponent {
-	background-color: var(--background-color);
-}
 
 #loginContainer h1 {
 	color: #ececec;
@@ -60,7 +57,7 @@
 }
 
 .loginComponent {
-	border: solid 1px;
+	
 	border-radius: 2%;
 	width: 18rem;
 	min-width: 18rem;
@@ -68,11 +65,11 @@
 	padding-right: 1.5rem;
 	padding-top: 10px;
 	padding-bottom: 10px;
-    background-color: var(--background-color-light);
+    background-color: var(--login-container-color);
 }
 
 .MuiFormLabel-root, .MuiInputBase-input:focus, 
-input, .MuiInputBase-root, .Mui-focused {
+input, label, .MuiInputBase-root, .Mui-focused {
 	color: white;
 }
 

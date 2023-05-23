@@ -10,6 +10,7 @@
     background-color: var(--background-color-light);
     display: flex;
     flex-direction: column;
+    max-width: 20rem;
     padding: 1rem;
 }
 

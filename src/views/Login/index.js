@@ -1,10 +1,11 @@
 import React from "react";
-import "./styles.css";
+
 import loginConstant from "./../../constants/login/login_constants.js";
 
 import { Button } from "react-bootstrap";
 import TextField from "@material-ui/core/TextField";
 import FormControl from "@material-ui/core/FormControl";
+import "./styles.css";
 
 import { DumbellIcon } from "../../react-components/Icons";
 

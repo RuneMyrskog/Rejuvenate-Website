@@ -13,8 +13,9 @@
 
 #userInfoMain img {
 	border-radius: 50%;
-	height: 10vmax;
-	width: 10vmax;
+	height: 12rem;
+	width: 12rem;
+	
 }
 
 #userInfoMain h1 {
@@ -89,6 +90,8 @@
 
 #viewableBio {
 	/* margin-bottom: 6px; */
+	box-sizing: border-box;
+	position: relative;
 	text-align: left;
 }
 

@@ -27,6 +27,10 @@ class CommentSection extends React.Component {
 	}
 
 	showCommentsButton() {
+		if(this.state.comments.length == 0) {
+			return null;
+		}
+
 		let spanText = this.state.display === 'none' ? 'show comments' : 'hide comments';
 		return(
 			<span className="showCommentsSpan" onClick={this.toggleDisplay.bind(this)}>{spanText}</span>
@@ -174,8 +178,8 @@ export default class PostEntry extends React.Component {
 		if (event.key === "Enter") {
 			const user = this.props.app.state.user;
 			const commentText = event.target.value;
-			console.log(user);
-
+			event.target.value = "";
+			const comments = this.state.comments;
 			fetch(`/api/posts/${this.props.post._id}/comment`, {
 				method: "post",
 				headers: {
@@ -188,16 +192,12 @@ export default class PostEntry extends React.Component {
 					text: commentText,
 				}),
 			})
-				.then((res) => res.json())
-				.then((comment) => {
-					console.log(comment);
-					event.target.value = "";
-					const comments = this.state.comments;
-					console.log(comment.username);
-					console.log(comment.text);
-					comments.push(comment)
-					this.setState({comments: comments});
-				});
+			.then((res) => res.json())
+			.then((comment) => {
+				console.log(comment);
+				comments.push(comment)
+				this.setState({comments: comments});
+			});
 		}
 	}
 
